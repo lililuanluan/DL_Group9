@@ -53,8 +53,10 @@ class SpatialTransformer(nn.Module):
             return F.grid_sample(src, new_locs, align_corners=True, mode=self.mode)
 
 def load_nii(path):
+    print("load_nii path=", path)
     X = nib.load(path)
     X = X.get_fdata()
+    print("X.shape=",np.shape(X))
     return X
 
 def save_nii(img, savename):

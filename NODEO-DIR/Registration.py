@@ -33,10 +33,12 @@ def registration(config, device, moving, fixed):
     :return all_phi: Displacement field for all time steps.
     '''
     im_shape = fixed.shape
-    moving = torch.from_numpy(moving).to(device).float()
+    moving = torch.from_numpy(moving).to(device).float() # 160, 192, 144
     fixed = torch.from_numpy(fixed).to(device).float()
     # make batch dimension
-    moving = moving.unsqueeze(0).unsqueeze(0)
+    print("moving.shape", moving.shape)
+    moving = moving.unsqueeze(0).unsqueeze(0) #1, 1, 160, 192, 144
+    # print("after unsqueeze moving.shape", moving.shape) 
     fixed = fixed.unsqueeze(0).unsqueeze(0)
 
     Network = BrainNet(img_sz=im_shape,

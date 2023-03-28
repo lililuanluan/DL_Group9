@@ -117,23 +117,35 @@ class BrainNet(ODEF):
 
     def forward(self, x):
 
-        imgx = self.img_sz[0]
-        imgy = self.img_sz[1]
-        imgz = self.img_sz[2]
+        imgx = self.img_sz[0] # 160
+        imgy = self.img_sz[1] # 192
+        imgz = self.img_sz[2] # 144
+        print("imgx=",imgx, "imgy=", imgy, "imgz=", imgz)
+        print("x.shape", x.shape) # 1, 3, 160, 192, 144
         # x = self.relu(self.enc_conv1(x))
         x = F.interpolate(x, scale_factor=0.5, mode='trilinear')  # Optional to downsample the image
-        x = self.relu(self.enc_conv2(x))
-        x = self.relu(self.enc_conv3(x))
-        x = self.relu(self.enc_conv4(x))
-        x = self.relu(self.enc_conv5(x))
-        x = self.enc_conv6(x)
-        x = x.view(-1)
+        # print("x.shape after downsample", x.shape) # 1, 3, 80, 96, 72 # sample 1 over 2
+        x = self.relu(self.enc_conv2(x)) # 1, 32, 40, 48, 36
+        # print("x.shape relu(self.enc_conv2(x)", x.shape)
+        x = self.relu(self.enc_conv3(x)) # 1, 32, 20, 24, 18
+        # print("x.shape relu(self.enc_conv3(x)", x.shape)
+        x = self.relu(self.enc_conv4(x)) # 1, 32, 10, 12, 9
+        # print("x.shape relu(self.enc_conv4(x)", x.shape)
+        x = self.relu(self.enc_conv5(x)) # 1, 32, 5, 6, 5
+        # print("x.shape relu(self.enc_conv5(x)", x.shape)
+        x = self.enc_conv6(x) # 1, 32, 3, 3, 3
+        # print("x.shape enc_conv6(x)", x.shape)
+        x = x.view(-1) # 864 view is like reshape
+        # print("x.shape view(-1)", x.shape)
         x = self.relu(self.lin1(x))
-        x = self.lin2(x)
+        x = self.lin2(x) # 207360
+        # print("x.shape lin1, lin2", x.shape)
         x = x.view(1, 3, int(math.ceil(imgx / pow(2, self.ds))), int(math.ceil(imgy / pow(2, self.ds))),
-                   int(math.ceil(imgz / pow(2, self.ds))))
+                   int(math.ceil(imgz / pow(2, self.ds)))) # 1, 3, 40, 48, 36
+        # print("x.shape x.view(1, 3...)", x.shape)
         for _ in range(self.ds):
-            x = F.upsample(x, scale_factor=2, mode='trilinear')
+            x = F.upsample(x, scale_factor=2, mode='trilinear') # 1, 3, 160, 192, 144
+        # print("x.shape F.upsample(x...)", x.shape)
         # Apply Gaussian/Averaging smoothing
         for _ in range(self.smoothing_pass):
             if self.smoothing_kernel == 'AK':
@@ -142,5 +154,6 @@ class BrainNet(ODEF):
                 x_x = self.sk(x[:, 0, :, :, :].unsqueeze(1))
                 x_y = self.sk(x[:, 1, :, :, :].unsqueeze(1))
                 x_z = self.sk(x[:, 2, :, :, :].unsqueeze(1))
-                x = torch.cat([x_x, x_y, x_z], 1)
+                x = torch.cat([x_x, x_y, x_z], 1) # 1, 3, 160, 192, 144
+        # print("x.shape after smoothing", x.shape)
         return x
