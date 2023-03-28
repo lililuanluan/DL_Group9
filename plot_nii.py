@@ -28,7 +28,11 @@ def plot_nii_5(path):
             plt.gcf().set_size_inches(10, 10)
         plt.show()
 
+
+plot_nii_3("../OASIS-data/oasis_cs_freesurfer_disc2.tar.gz")
+
 plot_nii_3("./data/OAS1_0001_MR1/brain.nii.gz")
+plot_nii_3("./data/OAS1_0001_MR1/brain_aseg.nii.gz")
 plot_nii_3("./data/OAS1_0002_MR1/brain.nii.gz")
 plot_nii_5("./result/df.nii.gz")
 plot_nii_3("./result/warped.nii.gz")
