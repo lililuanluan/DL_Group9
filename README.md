@@ -14,6 +14,11 @@ python3 ../plot_nii.py
 # to configure lambda1 in table 1
 python3 Registration.py --lambda_J 2
 
+# gitignore
+download datafiles and store in ./OASIS-data foler
+run: echo "OASIS-data" >> .gitignore
+before git add .
+
 # download data and process
 https://oasis-brains.org/
 go to download
