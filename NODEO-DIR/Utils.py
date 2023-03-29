@@ -4,6 +4,8 @@ from Loss import *
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import skimage.transform as skTrans
+
 
 class SpatialTransformer(nn.Module):
     """
@@ -57,6 +59,13 @@ def load_nii(path):
     X = nib.load(path)
     X = X.get_fdata()
     print("X.shape=",np.shape(X))
+    return X
+
+
+def load_nii_2(path):
+    X = nib.load(path)    
+    X = X.get_fdata()
+    X = skTrans.resize(X, (160, 192, 144), order=1, preserve_range=True)
     return X
 
 def save_nii(img, savename):

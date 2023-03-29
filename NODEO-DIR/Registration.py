@@ -8,8 +8,10 @@ from Utils import *
 
 def main(config):
     device = torch.device(config.device)
-    fixed = load_nii(config.fixed)
-    moving = load_nii(config.moving)
+    # fixed = load_nii(config.fixed)
+    # moving = load_nii(config.moving)
+    fixed = load_nii_2(config.fixed)
+    moving = load_nii_2(config.moving)
     assert fixed.shape == moving.shape  # two images to be registered must in the same size
     t = time.time()
     df, df_with_grid, warped_moving = registration(config, device, moving, fixed)

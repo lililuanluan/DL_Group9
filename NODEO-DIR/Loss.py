@@ -1,5 +1,6 @@
 import torch
 import torch.nn.functional as F
+import numpy as np
 
 class NCC(torch.nn.Module):
     """
@@ -85,6 +86,7 @@ def JacboianDet(J):
     Jdet2 = dx[:, :, :, :, 2] * (dy[:, :, :, :, 0] * dz[:, :, :, :, 1] - dy[:, :, :, :, 1] * dz[:, :, :, :, 0])
 
     Jdet = Jdet0 - Jdet1 + Jdet2
+    # print("Jdet=", Jdet)
     return Jdet
 
 def neg_Jdet_loss(J):
@@ -92,6 +94,7 @@ def neg_Jdet_loss(J):
     neg_Jdet = -1.0 * (Jdet - 0.5)
     selected_neg_Jdet = F.relu(neg_Jdet)
     return torch.mean(selected_neg_Jdet ** 2)
+    # return torch.log10(torch.mean(selected_neg_Jdet ** 2))
 
 def smoothloss_loss(df):
     return (((df[:, :, 1:, :, :] - df[:, :, :-1, :, :]) ** 2).mean() + \

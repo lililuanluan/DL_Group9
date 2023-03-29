@@ -120,8 +120,8 @@ class BrainNet(ODEF):
         imgx = self.img_sz[0] # 160
         imgy = self.img_sz[1] # 192
         imgz = self.img_sz[2] # 144
-        print("imgx=",imgx, "imgy=", imgy, "imgz=", imgz)
-        print("x.shape", x.shape) # 1, 3, 160, 192, 144
+        # print("imgx=",imgx, "imgy=", imgy, "imgz=", imgz)
+        # print("x.shape", x.shape) # 1, 3, 160, 192, 144
         # x = self.relu(self.enc_conv1(x))
         x = F.interpolate(x, scale_factor=0.5, mode='trilinear')  # Optional to downsample the image
         # print("x.shape after downsample", x.shape) # 1, 3, 80, 96, 72 # sample 1 over 2
