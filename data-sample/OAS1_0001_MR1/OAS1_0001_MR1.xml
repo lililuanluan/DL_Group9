@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xnat:MRSession ID="OAS1_0001_MR1" xmlns:oasis="http://nmr.mgh.harvard.edu/oasis" xmlns:prov="http://www.nbirn.net/prov" xmlns:wrk="http://nrg.wustl.edu/workflow" xmlns:xdat="http://nrg.wustl.edu/security" xmlns:xnat="http://nrg.wustl.edu/xnat" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <xnat:subject_ID>OAS1_0001</xnat:subject_ID>
+    <xnat:stabilization>mask</xnat:stabilization>
+    <xnat:scans>
+        <xnat:scan ID="mpr-1" type="MPRAGE">
+            <xnat:quality>usable</xnat:quality>
+            <xnat:parameters>
+                <xnat:voxelRes units="mm" x="1.0" y="1.0" z="1.25"/>
+                <xnat:orientation>Sag</xnat:orientation>
+                <xnat:fov x="256" y="256"/>
+                <xnat:partitions>128</xnat:partitions>
+                <xnat:tr>9.7</xnat:tr>
+                <xnat:te>4.0</xnat:te>
+                <xnat:ti>20.0</xnat:ti>
+                <xnat:flip>10</xnat:flip>
+                <xnat:sequence>MP-RAGE</xnat:sequence>
+            </xnat:parameters>
+            <xnat:file URI="cross-sectional/disc1/OAS1_0001_MR1/RAW/OAS1_0001_MR1_mpr-1_anon.img" content="MPRAGE_RAW" format="ANALYZE 7.5" xsi:type="xnat:imageResource">
+                <xnat:dimensions x="256" y="256" z="128"/>
+                <xnat:voxelRes units="mm" x="1.0" y="1.0" z="1.25"/>
+            </xnat:file>
+        </xnat:scan>
+        <xnat:scan ID="mpr-2" type="MPRAGE">
+            <xnat:quality>usable</xnat:quality>
+            <xnat:parameters>
+                <xnat:voxelRes units="mm" x="1.0" y="1.0" z="1.25"/>
+                <xnat:orientation>Sag</xnat:orientation>
+                <xnat:fov x="256" y="256"/>
+                <xnat:partitions>128</xnat:partitions>
+                <xnat:tr>9.7</xnat:tr>
+                <xnat:te>4.0</xnat:te>
+                <xnat:ti>20.0</xnat:ti>
+                <xnat:flip>10</xnat:flip>
+                <xnat:sequence>MP-RAGE</xnat:sequence>
+            </xnat:parameters>
+            <xnat:file URI="cross-sectional/disc1/OAS1_0001_MR1/RAW/OAS1_0001_MR1_mpr-2_anon.img" content="MPRAGE_RAW" format="ANALYZE 7.5" xsi:type="xnat:imageResource">
+                <xnat:dimensions x="256" y="256" z="128"/>
+                <xnat:voxelRes units="mm" x="1.0" y="1.0" z="1.25"/>
+            </xnat:file>
+        </xnat:scan>
+        <xnat:scan ID="mpr-3" type="MPRAGE">
+            <xnat:quality>usable</xnat:quality>
+            <xnat:parameters>
+                <xnat:voxelRes units="mm" x="1.0" y="1.0" z="1.25"/>
+                <xnat:orientation>Sag</xnat:orientation>
+                <xnat:fov x="256" y="256"/>
+                <xnat:partitions>128</xnat:partitions>
+                <xnat:tr>9.7</xnat:tr>
+                <xnat:te>4.0</xnat:te>
+                <xnat:ti>20.0</xnat:ti>
+                <xnat:flip>10</xnat:flip>
+                <xnat:sequence>MP-RAGE</xnat:sequence>
+            </xnat:parameters>
+            <xnat:file URI="cross-sectional/disc1/OAS1_0001_MR1/RAW/OAS1_0001_MR1_mpr-3_anon.img" content="MPRAGE_RAW" format="ANALYZE 7.5" xsi:type="xnat:imageResource">
+                <xnat:dimensions x="256" y="256" z="128"/>
+                <xnat:voxelRes units="mm" x="1.0" y="1.0" z="1.25"/>
+            </xnat:file>
+        </xnat:scan>
+        <xnat:scan ID="mpr-4" type="MPRAGE">
+            <xnat:quality>usable</xnat:quality>
+            <xnat:parameters>
+                <xnat:voxelRes units="mm" x="1.0" y="1.0" z="1.25"/>
+                <xnat:orientation>Sag</xnat:orientation>
+                <xnat:fov x="256" y="256"/>
+                <xnat:partitions>128</xnat:partitions>
+                <xnat:tr>9.7</xnat:tr>
+                <xnat:te>4.0</xnat:te>
+                <xnat:ti>20.0</xnat:ti>
+                <xnat:flip>10</xnat:flip>
+                <xnat:sequence>MP-RAGE</xnat:sequence>
+            </xnat:parameters>
+            <xnat:file URI="cross-sectional/disc1/OAS1_0001_MR1/RAW/OAS1_0001_MR1_mpr-4_anon.img" content="MPRAGE_RAW" format="ANALYZE 7.5" xsi:type="xnat:imageResource">
+                <xnat:dimensions x="256" y="256" z="128"/>
+                <xnat:voxelRes units="mm" x="1.0" y="1.0" z="1.25"/>
+            </xnat:file>
+        </xnat:scan>
+    </xnat:scans>
+    <xnat:reconstructions>
+        <xnat:reconstructedImage ID="OAS1_0001_MR1_RECON1">
+            <xnat:out>
+                <xnat:file URI="cross-sectional/disc1/OAS1_0001_MR1/PROCESSED/MPRAGE/T88_111/OAS1_0001_MR1_mpr_n4_anon_111_t88_gfc.img" content="T88" format="ANALYZE 7.5" xsi:type="xnat:imageResource">
+                    <xnat:dimensions x="176" y="208" z="176"/>
+                    <xnat:voxelRes units="mm" x="1.0" y="1.0" z="1.0"/>
+                </xnat:file>
+                <xnat:file URI="cross-sectional/disc1/OAS1_0001_MR1/PROCESSED/MPRAGE/T88_111/OAS1_0001_MR1_mpr_n4_anon_111_t88_masked_gfc.img" content="MASKED" format="ANALYZE 7.5" xsi:type="xnat:imageResource">
+                    <xnat:dimensions x="176" y="208" z="176"/>
+                    <xnat:voxelRes units="mm" x="1.0" y="1.0" z="1.0"/>
+                </xnat:file>
+                <xnat:file URI="cross-sectional/disc1/OAS1_0001_MR1/PROCESSED/MPRAGE/SUBJ_111/OAS1_0001_MR1_mpr_n4_anon_sbj_111.img" content="SUBJ" format="ANALYZE 7.5" xsi:type="xnat:imageResource">
+                    <xnat:dimensions x="256" y="256" z="160"/>
+                    <xnat:voxelRes units="mm" x="1.0" y="1.0" z="1.0"/>
+                </xnat:file>
+            </xnat:out>
+        </xnat:reconstructedImage>
+    </xnat:reconstructions>
+    <xnat:assessors>
+        <xnat:assessor ID="OAS1_0001_MR1_ASF" xsi:type="oasis:atlasScalingFactorData">
+            <xnat:mrSession_ID>OAS1_0001_MR1</xnat:mrSession_ID>
+            <oasis:scalingFactor>1.306</oasis:scalingFactor>
+            <oasis:eICV>1344</oasis:eICV>
+        </xnat:assessor>
+        <xnat:assessor ID="OAS1_0001_MR1_FSEG" brainPercent="0.743" xsi:type="oasis:segmentationFastData">
+            <xnat:out>
+                <xnat:file URI="cross-sectional/disc1/OAS1_0001_MR1/FSL_SEG/OAS1_0001_MR1_mpr_n4_anon_111_t88_masked_gfc_fseg.img" content="FSEG" format="ANALYZE 7.5" xsi:type="xnat:imageResource">
+                    <xnat:dimensions x="176" y="208" z="176"/>
+                    <xnat:voxelRes units="mm" x="1.0" y="1.0" z="1.0"/>
+                </xnat:file>
+            </xnat:out>
+            <xnat:mrSession_ID>OAS1_0001_MR1</xnat:mrSession_ID>
+            <oasis:brainVolume name="Whole Brain" units="mm"/>
+        </xnat:assessor>
+    </xnat:assessors>
+</xnat:MRSession>

@@ -1,0 +1,1 @@
+mri_tessellate ../mri/filled.mgz 127 ../surf/rh.orig.nofix

@@ -1,0 +1,165 @@
+/autofs/space/sake_019/users/oasis/OAS1_0001_MR1/mri
+/space/sake/19/users/freesurfer_oasis_100506/bin//mri_nu_correct.mni
+--i orig.mgz --o nu.mgz --n 2
+nIters 2
+$Id: mri_nu_correct.mni,v 1.4 2006/04/17 20:29:26 nicks Exp $
+Linux node0375 2.6.9-22.0.2.106.unsupportedsmp #1 SMP Fri Jan 20 04:48:30 CST 2006 x86_64 x86_64 x86_64 GNU/Linux
+Thu Oct  5 15:51:24 EDT 2006
+Program nu_correct, built from:
+Package MNI N3, version 1.10, compiled by nicks@minerva (x86_64-unknown-linux-gnu) on 2005-11-15 at 20:37:35
+tmpdir is ./tmp.mri_nu_correct.mni.19350
+/autofs/space/sake_019/users/oasis/OAS1_0001_MR1/mri
+mri_convert orig.mgz ./tmp.mri_nu_correct.mni.19350/nu0.mnc
+mri_convert orig.mgz ./tmp.mri_nu_correct.mni.19350/nu0.mnc 
+Can't find the talairach xform '/autofs/space/sake_019/users/oasis/OAS1_0001_MR1/mri/transforms/talairach.xfm'
+Transform is not loaded into mri
+reading from orig.mgz...
+TR=0.00, TE=0.00, TI=0.00, flip angle=0.00
+i_ras = (-1, 0, 0)
+j_ras = (0, 0, -1)
+k_ras = (0, 1, 0)
+writing to ./tmp.mri_nu_correct.mni.19350/nu0.mnc...
+ 
+--------------------------------------------------------
+Iteration 1 Thu Oct  5 15:51:37 EDT 2006
+nu_correct -clobber ./tmp.mri_nu_correct.mni.19350/nu0.mnc ./tmp.mri_nu_correct.mni.19350/nu1.mnc
+[jpacheco@node0375:/autofs/space/sake_019/users/oasis/OAS1_0001_MR1/mri/] [2006-10-05 15:51:38] running:
+  /usr/pubsw/packages/mni/current/bin/nu_estimate_np_and_em -parzen -log -sharpen 0.15 0.01 -iterations 50 -stop 0.001 -shrink 4 -auto_mask -nonotify -b_spline 1 -distance 200 -quiet -execute -clobber -nokeeptmp -tmpdir /usr/tmp/nu_correct_19402/ ./tmp.mri_nu_correct.mni.19350/nu0.mnc ./tmp.mri_nu_correct.mni.19350/nu1.imp
+
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Number of iterations: 29 
+CV of field change: 0.00095618
+[jpacheco@node0375:/autofs/space/sake_019/users/oasis/OAS1_0001_MR1/mri/] [2006-10-05 15:52:16] running:
+  /usr/pubsw/packages/mni/current/bin/make_template -quiet -shrink 3 ./tmp.mri_nu_correct.mni.19350/nu0.mnc /usr/tmp/nu_correct_19402//template.mnc
+
+Transforming slices:......................................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Transforming slices:................................................................................................................................................................................................................................................................Done
+ 
+ 
+--------------------------------------------------------
+Iteration 2 Thu Oct  5 15:52:41 EDT 2006
+nu_correct -clobber ./tmp.mri_nu_correct.mni.19350/nu1.mnc ./tmp.mri_nu_correct.mni.19350/nu2.mnc
+[jpacheco@node0375:/autofs/space/sake_019/users/oasis/OAS1_0001_MR1/mri/] [2006-10-05 15:52:42] running:
+  /usr/pubsw/packages/mni/current/bin/nu_estimate_np_and_em -parzen -log -sharpen 0.15 0.01 -iterations 50 -stop 0.001 -shrink 4 -auto_mask -nonotify -b_spline 1 -distance 200 -quiet -execute -clobber -nokeeptmp -tmpdir /usr/tmp/nu_correct_19814/ ./tmp.mri_nu_correct.mni.19350/nu1.mnc ./tmp.mri_nu_correct.mni.19350/nu2.imp
+
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Processing:.................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Number of iterations: 2 
+CV of field change: 0.000712362
+[jpacheco@node0375:/autofs/space/sake_019/users/oasis/OAS1_0001_MR1/mri/] [2006-10-05 15:52:47] running:
+  /usr/pubsw/packages/mni/current/bin/make_template -quiet -shrink 3 ./tmp.mri_nu_correct.mni.19350/nu1.mnc /usr/tmp/nu_correct_19814//template.mnc
+
+Transforming slices:......................................................................................Done
+Not implemented yet in cache_volume_range_has_changed()
+Not implemented yet in cache_volume_range_has_changed()
+Transforming slices:................................................................................................................................................................................................................................................................Done
+ 
+ 
+ 
+mri_convert ./tmp.mri_nu_correct.mni.19350/nu2.mnc nu.mgz --like orig.mgz
+mri_convert ./tmp.mri_nu_correct.mni.19350/nu2.mnc nu.mgz --like orig.mgz 
+Can't find the talairach xform '/autofs/space/sake_019/users/oasis/OAS1_0001_MR1/mri/transforms/talairach.xfm'
+Transform is not loaded into mri
+reading from ./tmp.mri_nu_correct.mni.19350/nu2.mnc...
+TR=0.00, TE=0.00, TI=0.00, flip angle=0.00
+i_ras = (-1, 0, 0)
+j_ras = (0, 0, -1)
+k_ras = (0, 1, 0)
+INFO: transform src into the like-volume: orig.mgz
+writing to nu.mgz...
+ 
+ 
+Thu Oct  5 15:53:19 EDT 2006
+mri_nu_correct.mni done

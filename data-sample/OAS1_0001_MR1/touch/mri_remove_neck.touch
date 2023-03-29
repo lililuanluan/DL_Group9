@@ -1,0 +1,1 @@
+mri_remove_neck -radius 25 nu.mgz transforms/talairach.m3z /space/sake/19/users/freesurfer_oasis_100506/average/RB_all_2006-02-15.gca nu_noneck.mgz

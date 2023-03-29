@@ -1,0 +1,1 @@
+mris_smooth -nw ../surf/lh.orig.nofix ../surf/lh.smoothwm.nofix

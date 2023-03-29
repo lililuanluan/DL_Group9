@@ -1,0 +1,66 @@
+-------------------------------------------------------------
+Running recon_checker on:
+Tue Oct 10 08:03:01 EDT 2006
+Checking Last Version Used:
+/space/sake/19/users/freesurfer_oasis_100506/bin/recon-all
+In output_file_checker
+
+In recon_all_status_log_checker
+OAS1_0002_MR1 COMPLETE
+
+-------------------------------------------------------------
+Running recon_checker on:
+Tue Oct 10 09:54:47 EDT 2006
+Checking Last Version Used:
+/space/sake/19/users/freesurfer_oasis_100506/bin/recon-all
+-------------------------------------------------------------
+Running recon_checker on:
+Tue Oct 10 10:05:29 EDT 2006
+Checking Last Version Used:
+/space/sake/19/users/freesurfer_oasis_100506/bin/recon-all
+-------------------------------------------------------------
+Running recon_checker on:
+Mon Oct 16 12:57:39 EDT 2006
+Checking Last Version Used:
+/space/sake/19/users/freesurfer_oasis_100506/bin/recon-all
+In output_file_checker
+checking if output file order file is set...
+output_file_order_file not specified, using default order
+check to see if all files exist...
+OAS1_0002_MR1 outputfiles_NOTOK
+
+In recon_all_status_log_checker
+OAS1_0002_MR1 STEPS_MISSING
+
+-------------------------------------------------------------
+Running recon_checker on:
+Mon Mar 12 17:02:24 EDT 2007
+Checking Last Version Used:
+/space/sake/19/users/freesurfer_oasis_100506/bin/recon-all
+In output_file_checker
+checking if output file order file is set...
+output_file_order_file not specified, using default order
+check to see if all files exist...
+OAS1_0002_MR1 outputfiles_NOTOK
+
+In recon_all_status_log_checker
+
+COMPLETE_LOG: /space/tensor/17/users/jpacheco/QAtools//data_checker/sample-recon-all-status.log
+OAS1_0002_MR1 COMPLETE
+
+-------------------------------------------------------------
+Running recon_checker on:
+Mon Mar 12 17:05:21 EDT 2007
+Checking Last Version Used:
+/space/sake/19/users/freesurfer_oasis_100506/bin/recon-all
+In output_file_checker
+checking if output file order file is set...
+output_file_order_file not specified, using default order
+check to see if all files exist...
+OAS1_0002_MR1 outputfiles_NOTOK
+
+In recon_all_status_log_checker
+
+COMPLETE_LOG: /space/tensor/17/users/jpacheco/QAtools//data_checker/sample-recon-all-status.log
+OAS1_0002_MR1 COMPLETE
+

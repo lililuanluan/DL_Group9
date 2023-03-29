@@ -1,0 +1,1 @@
+mris_make_surfaces -mgz -T1 brain.finalsurfs OAS1_0002_MR1 lh

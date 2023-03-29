@@ -1,0 +1,166 @@
+-------------------------------------------------------------
+Running recon_checker on:
+Tue Oct 10 08:03:01 EDT 2006
+Checking Last Version Used:
+/space/sake/19/users/freesurfer_oasis_100506/bin/recon-all
+Checking ALL Versions Used:
+/space/sake/19/users/freesurfer_oasis_100506/bin/recon-all,
+In output_file_checker
+SUBJECTS_DIR is /autofs/space/sake_019/users/oasis 
+
+
+In recon_all_status_log_checker
+OAS1_0002_MR1 COMPLETE 
+
+SUBJECTS_DIR is /autofs/space/sake_019/users/oasis 
+
+-------------------------------------------------------------
+Running recon_checker on:
+Tue Oct 10 09:54:47 EDT 2006
+Checking Last Version Used:
+/space/sake/19/users/freesurfer_oasis_100506/bin/recon-all
+Checking ALL Versions Used:
+/space/sake/19/users/freesurfer_oasis_100506/bin/recon-all,
+-------------------------------------------------------------
+Running recon_checker on:
+Tue Oct 10 10:05:29 EDT 2006
+Checking Last Version Used:
+/space/sake/19/users/freesurfer_oasis_100506/bin/recon-all
+Checking ALL Versions Used:
+/space/sake/19/users/freesurfer_oasis_100506/bin/recon-all,
+-------------------------------------------------------------
+Running recon_checker on:
+Mon Oct 16 12:57:39 EDT 2006
+Checking Last Version Used:
+/space/sake/19/users/freesurfer_oasis_100506/bin/recon-all
+Checking ALL Versions Used:
+/space/sake/19/users/freesurfer_oasis_100506/bin/recon-all,
+In output_file_checker
+SUBJECTS_DIR is /autofs/space/sake_019/users/oasis 
+
+checking if output file order file is set...
+output_file_order_file not specified, using default order
+checking these files: 
+/autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/001.mgz /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/002.mgz /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/003.mgz /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/004.mgz mri/rawavg.mgz mri/orig.mgz mri/nu.mgz mri/transforms/talairach.auto.xfm mri/transforms/talairach.xfm mri/T1.mgz mri/brainmask.auto.mgz mri/brainmask.mgz mri/transforms/talairach.lta mri/norm.mgz mri/transforms/talairach.m3z mri/transforms/talairach.m3z.inv.x.mgz mri/transforms/talairach.m3z.inv.y.mgz mri/transforms/talairach.m3z.inv.z.mgz mri/nu_noneck.mgz mri/transforms/talairach_with_skull.lta mri/aseg.auto.mgz mri/aseg.mgz stats/aseg.stats mri/brain.mgz mri/brain.finalsurfs.mgz mri/wm.seg.mgz mri/wm.asegedit.mgz mri/wm.mgz mri/filled.mgz scripts/ponscc.cut.log surf/lh.orig.nofix surf/lh.smoothwm.nofix surf/lh.inflated.nofix surf/lh.qsphere.nofix surf/lh.orig surf/lh.white surf/lh.curv surf/lh.area surf/lh.pial surf/lh.thickness surf/lh.smoothwm surf/lh.sulc surf/lh.inflated mri/lh.ribbon.mgz surf/lh.sphere surf/lh.sphere.reg surf/lh.rh.sphere.reg surf/lh.avg_curv label/lh.aparc.annot stats/lh.aparc.stats label/lh.aparc.a2005s.annot surf/rh.orig.nofix surf/rh.smoothwm.nofix surf/rh.inflated.nofix surf/rh.qsphere.nofix surf/rh.orig surf/rh.white surf/rh.curv surf/rh.area surf/rh.pial surf/rh.thickness surf/rh.smoothwm surf/rh.sulc surf/rh.inflated mri/rh.ribbon.mgz surf/rh.sphere surf/rh.sphere.reg surf/rh.lh.sphere.reg surf/rh.avg_curv label/rh.aparc.annot stats/rh.aparc.stats label/rh.aparc.a2005s.annot mri/aparc+aseg.mgz
+check to see if all files exist...
+found 73 files ...
+realOrder_plus1 is 74
+ERROR: order is not commmon order: stopped at mri/rawavg.mgz, should be /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/001.mgz ...
+real order:		common order:
+..........		.........
+..........		.........
+..........		.........
+mri/rawavg.mgz		/autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/001.mgz
+		
+mri/rawavg.mgz		/autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/001.mgz
+mri/orig.mgz		/autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/002.mgz
+mri/nu.mgz		/autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/003.mgz
+mri/transforms/talairach.auto.xfm		/autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/004.mgz
+mri/transforms/talairach.xfm		mri/rawavg.mgz
+..........		.........
+..........		.........
+..........		.........
+OAS1_0002_MR1 outputfiles_NOTOK
+
+In recon_all_status_log_checker
+OAS1_0002_MR1 STEPS_MISSING 
+Expected to see the following steps before 
+#@# AvgCurv rh Wed Oct 11 22:17:29 EDT 2006 
+in the recon-all-status.log file (line # 205): 
+--> Contra Surf Reg lh 
+--> AvgCurv lh 
+--> Cortical Parc lh 
+--> Parcellation Stats lh 
+--> Cortical Parc 2 lh 
+--> Parcellation Stats 2 lh 
+--> Tessellate rh 
+--> Smooth1 rh 
+--> Inflation1 rh 
+--> QSphere rh 
+--> Fix Topology rh 
+--> Make Final Surf rh 
+--> Smooth2 rh 
+--> Inflation2 rh 
+--> Cortical ribbon mask rh 
+--> Sphere rh 
+--> Surf Reg rh 
+--> Contra Surf Reg rh
+
+-------------------------------------------------------------
+Running recon_checker on:
+Mon Mar 12 17:02:24 EDT 2007
+Checking Last Version Used:
+/space/sake/19/users/freesurfer_oasis_100506/bin/recon-all
+Checking ALL Versions Used:
+/space/sake/19/users/freesurfer_oasis_100506/bin/recon-all,
+In output_file_checker
+SUBJECTS_DIR is /autofs/space/sake_019/users/oasis 
+
+checking if output file order file is set...
+output_file_order_file not specified, using default order
+checking these files: 
+/autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/001.mgz /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/002.mgz /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/003.mgz /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/004.mgz mri/rawavg.mgz mri/orig.mgz mri/nu.mgz mri/transforms/talairach.auto.xfm mri/transforms/talairach.xfm mri/T1.mgz mri/brainmask.auto.mgz mri/brainmask.mgz mri/transforms/talairach.lta mri/norm.mgz mri/transforms/talairach.m3z mri/transforms/talairach.m3z.inv.x.mgz mri/transforms/talairach.m3z.inv.y.mgz mri/transforms/talairach.m3z.inv.z.mgz mri/nu_noneck.mgz mri/transforms/talairach_with_skull.lta mri/aseg.auto.mgz mri/aseg.mgz stats/aseg.stats mri/brain.mgz mri/brain.finalsurfs.mgz mri/wm.seg.mgz mri/wm.asegedit.mgz mri/wm.mgz mri/filled.mgz scripts/ponscc.cut.log surf/lh.orig.nofix surf/lh.smoothwm.nofix surf/lh.inflated.nofix surf/lh.qsphere.nofix surf/lh.orig surf/lh.white surf/lh.curv surf/lh.area surf/lh.pial surf/lh.thickness surf/lh.smoothwm surf/lh.sulc surf/lh.inflated mri/lh.ribbon.mgz surf/lh.sphere surf/lh.sphere.reg surf/lh.rh.sphere.reg surf/lh.avg_curv label/lh.aparc.annot stats/lh.aparc.stats label/lh.aparc.a2005s.annot surf/rh.orig.nofix surf/rh.smoothwm.nofix surf/rh.inflated.nofix surf/rh.qsphere.nofix surf/rh.orig surf/rh.white surf/rh.curv surf/rh.area surf/rh.pial surf/rh.thickness surf/rh.smoothwm surf/rh.sulc surf/rh.inflated mri/rh.ribbon.mgz surf/rh.sphere surf/rh.sphere.reg surf/rh.lh.sphere.reg surf/rh.avg_curv label/rh.aparc.annot stats/rh.aparc.stats label/rh.aparc.a2005s.annot mri/aparc+aseg.mgz
+check to see if all files exist...
+found 73 files ...
+realOrder_plus1 is 74
+ERROR: order is not commmon order: stopped at mri/rawavg.mgz, should be /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/001.mgz ...
+real order:		common order:
+..........		.........
+..........		.........
+..........		.........
+mri/rawavg.mgz		/autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/001.mgz
+		
+mri/rawavg.mgz		/autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/001.mgz
+mri/orig.mgz		/autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/002.mgz
+mri/nu.mgz		/autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/003.mgz
+mri/transforms/talairach.auto.xfm		/autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/004.mgz
+mri/transforms/talairach.xfm		mri/rawavg.mgz
+..........		.........
+..........		.........
+..........		.........
+OAS1_0002_MR1 outputfiles_NOTOK
+
+In recon_all_status_log_checker
+
+COMPLETE_LOG: /space/tensor/17/users/jpacheco/QAtools//data_checker/sample-recon-all-status.log
+OAS1_0002_MR1 COMPLETE 
+
+-------------------------------------------------------------
+Running recon_checker on:
+Mon Mar 12 17:05:21 EDT 2007
+Checking Last Version Used:
+/space/sake/19/users/freesurfer_oasis_100506/bin/recon-all
+Checking ALL Versions Used:
+/space/sake/19/users/freesurfer_oasis_100506/bin/recon-all,
+In output_file_checker
+SUBJECTS_DIR is /autofs/space/sake_019/users/oasis 
+
+checking if output file order file is set...
+output_file_order_file not specified, using default order
+checking these files: 
+/autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/001.mgz /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/002.mgz /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/003.mgz /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/004.mgz mri/rawavg.mgz mri/orig.mgz mri/nu.mgz mri/transforms/talairach.auto.xfm mri/transforms/talairach.xfm mri/T1.mgz mri/brainmask.auto.mgz mri/brainmask.mgz mri/transforms/talairach.lta mri/norm.mgz mri/transforms/talairach.m3z mri/transforms/talairach.m3z.inv.x.mgz mri/transforms/talairach.m3z.inv.y.mgz mri/transforms/talairach.m3z.inv.z.mgz mri/nu_noneck.mgz mri/transforms/talairach_with_skull.lta mri/aseg.auto.mgz mri/aseg.mgz stats/aseg.stats mri/brain.mgz mri/brain.finalsurfs.mgz mri/wm.seg.mgz mri/wm.asegedit.mgz mri/wm.mgz mri/filled.mgz scripts/ponscc.cut.log surf/lh.orig.nofix surf/lh.smoothwm.nofix surf/lh.inflated.nofix surf/lh.qsphere.nofix surf/lh.orig surf/lh.white surf/lh.curv surf/lh.area surf/lh.pial surf/lh.thickness surf/lh.smoothwm surf/lh.sulc surf/lh.inflated mri/lh.ribbon.mgz surf/lh.sphere surf/lh.sphere.reg surf/lh.rh.sphere.reg surf/lh.avg_curv label/lh.aparc.annot stats/lh.aparc.stats label/lh.aparc.a2005s.annot surf/rh.orig.nofix surf/rh.smoothwm.nofix surf/rh.inflated.nofix surf/rh.qsphere.nofix surf/rh.orig surf/rh.white surf/rh.curv surf/rh.area surf/rh.pial surf/rh.thickness surf/rh.smoothwm surf/rh.sulc surf/rh.inflated mri/rh.ribbon.mgz surf/rh.sphere surf/rh.sphere.reg surf/rh.lh.sphere.reg surf/rh.avg_curv label/rh.aparc.annot stats/rh.aparc.stats label/rh.aparc.a2005s.annot mri/aparc+aseg.mgz
+check to see if all files exist...
+found 73 files ...
+realOrder_plus1 is 74
+ERROR: order is not commmon order: stopped at mri/rawavg.mgz, should be /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/001.mgz ...
+real order:		common order:
+..........		.........
+..........		.........
+..........		.........
+mri/rawavg.mgz		/autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/001.mgz
+		
+mri/rawavg.mgz		/autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/001.mgz
+mri/orig.mgz		/autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/002.mgz
+mri/nu.mgz		/autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/003.mgz
+mri/transforms/talairach.auto.xfm		/autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/004.mgz
+mri/transforms/talairach.xfm		mri/rawavg.mgz
+..........		.........
+..........		.........
+..........		.........
+OAS1_0002_MR1 outputfiles_NOTOK
+
+In recon_all_status_log_checker
+
+COMPLETE_LOG: /space/tensor/17/users/jpacheco/QAtools//data_checker/sample-recon-all-status.log
+OAS1_0002_MR1 COMPLETE 
+

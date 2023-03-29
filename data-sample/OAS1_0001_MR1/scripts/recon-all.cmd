@@ -1,0 +1,5 @@
+#--------------------------------------------
+#@# ASeg Stats Thu Jun  7 14:09:25 EDT 2007
+
+ mri_segstats --seg mri/aseg.mgz --sum stats/aseg.stats --pv mri/norm.mgz --excludeid 0 --brain-vol-from-seg --brainmask mri/brainmask.mgz --in mri/norm.mgz --in-intensity-name norm --in-intensity-units MR --etiv --subject OAS1_0001_MR1 --surf-wm-vol --ctab /usr/local/freesurfer/dev/ASegStatsLUT.txt 
+

@@ -1,0 +1,1 @@
+mri_em_register -mask brainmask.mgz nu.mgz /space/sake/19/users/freesurfer_oasis_100506/average/RB_all_2006-02-15.gca transforms/talairach.lta

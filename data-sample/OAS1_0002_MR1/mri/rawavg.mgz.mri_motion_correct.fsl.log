@@ -1,0 +1,211 @@
+mri_motion_correct.fsl log file
+$Id: mri_motion_correct.fsl,v 1.6 2006/04/18 23:05:05 nicks Exp $
+/space/sake/19/users/freesurfer_oasis_100506/bin//mri_motion_correct.fsl
+
+/autofs/space/sake_019/users/oasis/OAS1_0002_MR1
+Linux node0332 2.6.9-22.0.2.106.unsupportedsmp #1 SMP Fri Jan 20 04:48:30 CST 2006 x86_64 x86_64 x86_64 GNU/Linux
+Thu Oct  5 15:41:25 EDT 2006
+/space/sake/19/users/freesurfer_oasis_100506/bin//mri_convert
+/space/sake/19/users/freesurfer_oasis_100506/fsl/bin/flirt
+-----------------------------------------
+Converting /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/001.mgz 
+Thu Oct  5 15:41:34 EDT 2006
+/autofs/space/sake_019/users/oasis/OAS1_0002_MR1
+mri_convert /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/001.mgz /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-1.img -odt float
+mri_convert /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/001.mgz /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-1.img -odt float 
+reading from /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/001.mgz...
+TR=0.00, TE=0.00, TI=0.00, flip angle=0.00
+i_ras = (0, 1, 0)
+j_ras = (0, 0, 1)
+k_ras = (-1, 0, 0)
+changing data type from 4 to 3 (noscale = 0)...
+writing to /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-1.img...
+Analyze Output Matrix
+ 0.000   0.000  -1.250   81.250;
+ 1.000   0.000   0.000  -129.000;
+ 0.000   1.000   0.000  -129.000;
+ 0.000   0.000   0.000   1.000;
+--------------------
+INFO: set hdr.hist.orient to -1
+-----------------------------------------
+Converting /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/002.mgz 
+Thu Oct  5 15:41:41 EDT 2006
+/autofs/space/sake_019/users/oasis/OAS1_0002_MR1
+mri_convert /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/002.mgz /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-2.img -odt float
+mri_convert /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/002.mgz /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-2.img -odt float 
+reading from /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/002.mgz...
+TR=0.00, TE=0.00, TI=0.00, flip angle=0.00
+i_ras = (0, 1, 0)
+j_ras = (0, 0, 1)
+k_ras = (-1, 0, 0)
+changing data type from 4 to 3 (noscale = 0)...
+writing to /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-2.img...
+Analyze Output Matrix
+ 0.000   0.000  -1.250   81.250;
+ 1.000   0.000   0.000  -129.000;
+ 0.000   1.000   0.000  -129.000;
+ 0.000   0.000   0.000   1.000;
+--------------------
+INFO: set hdr.hist.orient to -1
+-----------------------------------------
+Converting /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/003.mgz 
+Thu Oct  5 15:41:47 EDT 2006
+/autofs/space/sake_019/users/oasis/OAS1_0002_MR1
+mri_convert /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/003.mgz /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-3.img -odt float
+mri_convert /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/003.mgz /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-3.img -odt float 
+reading from /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/003.mgz...
+TR=0.00, TE=0.00, TI=0.00, flip angle=0.00
+i_ras = (0, 1, 0)
+j_ras = (0, 0, 1)
+k_ras = (-1, 0, 0)
+changing data type from 4 to 3 (noscale = 0)...
+writing to /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-3.img...
+Analyze Output Matrix
+ 0.000   0.000  -1.250   81.250;
+ 1.000   0.000   0.000  -129.000;
+ 0.000   1.000   0.000  -129.000;
+ 0.000   0.000   0.000   1.000;
+--------------------
+INFO: set hdr.hist.orient to -1
+-----------------------------------------
+Converting /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/004.mgz 
+Thu Oct  5 15:41:52 EDT 2006
+/autofs/space/sake_019/users/oasis/OAS1_0002_MR1
+mri_convert /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/004.mgz /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-4.img -odt float
+mri_convert /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/004.mgz /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-4.img -odt float 
+reading from /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/004.mgz...
+TR=0.00, TE=0.00, TI=0.00, flip angle=0.00
+i_ras = (0, 1, 0)
+j_ras = (0, 0, 1)
+k_ras = (-1, 0, 0)
+changing data type from 4 to 3 (noscale = 0)...
+writing to /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-4.img...
+Analyze Output Matrix
+ 0.000   0.000  -1.250   81.250;
+ 1.000   0.000   0.000  -129.000;
+ 0.000   1.000   0.000  -129.000;
+ 0.000   0.000   0.000   1.000;
+--------------------
+INFO: set hdr.hist.orient to -1
+-----------------------------------------
+Motion Correcting /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-2.img
+Thu Oct  5 15:41:57 EDT 2006
+/autofs/space/sake_019/users/oasis/OAS1_0002_MR1
+fsl_rigid_register -maxangle 90 -r /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-1.img -i /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-2.img -o /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/resampled.img -tmpdir /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302 -cleanup
+
+
+
+$Id: fsl_rigid_register,v 1.17 2006/09/08 20:31:41 greve Exp $
+Thu Oct  5 15:41:57 EDT 2006
+/autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/resampled.img
+Reference is analyze, not converting
+Input is analyze, not converting
+Output is analyze, not converting
+--------------------------------------
+/autofs/space/sake_019/users/oasis/OAS1_0002_MR1
+calling eval flirt -in /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-2.hdr -out /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/resampled.hdr -bins 256 -cost corratio -searchrx -90 90 -searchry -90 90 -searchrz -90 90 -interp trilinear -dof 6 -ref /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-1.hdr -omat /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/resampled.fslmat
+WARNING: Both reference and input images have an sform matrix set
+  The output image will use the sform from the reference image
+ 
+Started at Thu Oct 5 15:41:57 EDT 2006 
+Ended   at Thu Oct  5 15:44:38 EDT 2006
+ 
+fsl_rigid_register Done
+ 
+To check results, run:
+tkmedit -f /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-1.img -aux /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/resampled.img
+ 
+mv /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/resampled.img /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-2.img
+-----------------------------------------
+Motion Correcting /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-3.img
+Thu Oct  5 15:44:38 EDT 2006
+/autofs/space/sake_019/users/oasis/OAS1_0002_MR1
+fsl_rigid_register -maxangle 90 -r /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-1.img -i /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-3.img -o /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/resampled.img -tmpdir /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302 -cleanup
+
+
+
+$Id: fsl_rigid_register,v 1.17 2006/09/08 20:31:41 greve Exp $
+Thu Oct  5 15:44:38 EDT 2006
+/autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/resampled.img
+Reference is analyze, not converting
+Input is analyze, not converting
+Output is analyze, not converting
+--------------------------------------
+/autofs/space/sake_019/users/oasis/OAS1_0002_MR1
+calling eval flirt -in /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-3.hdr -out /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/resampled.hdr -bins 256 -cost corratio -searchrx -90 90 -searchry -90 90 -searchrz -90 90 -interp trilinear -dof 6 -ref /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-1.hdr -omat /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/resampled.fslmat
+WARNING: Both reference and input images have an sform matrix set
+  The output image will use the sform from the reference image
+ 
+Started at Thu Oct 5 15:44:38 EDT 2006 
+Ended   at Thu Oct  5 15:47:31 EDT 2006
+ 
+fsl_rigid_register Done
+ 
+To check results, run:
+tkmedit -f /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-1.img -aux /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/resampled.img
+ 
+mv /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/resampled.img /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-3.img
+-----------------------------------------
+Motion Correcting /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-4.img
+Thu Oct  5 15:47:32 EDT 2006
+/autofs/space/sake_019/users/oasis/OAS1_0002_MR1
+fsl_rigid_register -maxangle 90 -r /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-1.img -i /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-4.img -o /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/resampled.img -tmpdir /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302 -cleanup
+
+
+
+$Id: fsl_rigid_register,v 1.17 2006/09/08 20:31:41 greve Exp $
+Thu Oct  5 15:47:32 EDT 2006
+/autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/resampled.img
+Reference is analyze, not converting
+Input is analyze, not converting
+Output is analyze, not converting
+--------------------------------------
+/autofs/space/sake_019/users/oasis/OAS1_0002_MR1
+calling eval flirt -in /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-4.hdr -out /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/resampled.hdr -bins 256 -cost corratio -searchrx -90 90 -searchry -90 90 -searchrz -90 90 -interp trilinear -dof 6 -ref /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-1.hdr -omat /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/resampled.fslmat
+WARNING: Both reference and input images have an sform matrix set
+  The output image will use the sform from the reference image
+ 
+Started at Thu Oct 5 15:47:32 EDT 2006 
+Ended   at Thu Oct  5 15:50:31 EDT 2006
+ 
+fsl_rigid_register Done
+ 
+To check results, run:
+tkmedit -f /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-1.img -aux /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/resampled.img
+ 
+mv /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/resampled.img /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-4.img
+-----------------------------------------
+Averaging 
+Thu Oct  5 15:50:36 EDT 2006
+/autofs/space/sake_019/users/oasis/OAS1_0002_MR1
+mri_average -noconform /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-1.img /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-2.img /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-3.img /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-4.img /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/avgvol.img
+inhibiting isotropic volume interpolation
+1 of 4: reading /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-1.img...
+2 of 4: reading /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-2.img...
+3 of 4: reading /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-3.img...
+4 of 4: reading /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/cor-4.img...
+writing to /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/avgvol.img...
+alignment and averaging took 0 minutes and 28 seconds.
+Analyze Output Matrix
+ 0.000   0.000  -1.250   81.250;
+ 1.000   0.000   0.000  -129.000;
+ 0.000   1.000   0.000  -129.000;
+ 0.000   0.000   0.000   1.000;
+--------------------
+INFO: set hdr.hist.orient to -1
+-----------------------------------------
+Converting Average to output 
+Thu Oct  5 15:51:05 EDT 2006
+/autofs/space/sake_019/users/oasis/OAS1_0002_MR1
+mri_convert /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/avgvol.img /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/rawavg.mgz -tr 0 -te 0 -TI 0 -flip_angle 0
+mri_convert /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/avgvol.img /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/rawavg.mgz -tr 0 -te 0 -TI 0 -flip_angle 0 
+reading from /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/tmp-mri_motion_correct.fsl-2302/avgvol.img...
+TR=0.00, TE=0.00, TI=0.00, flip angle=0.00
+i_ras = (0, 1, 0)
+j_ras = (0, 0, 1)
+k_ras = (-1, 0, 0)
+writing to /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/rawavg.mgz...
+-----------------------------------------
+Started at: Thu Oct 5 15:41:25 EDT 2006
+Ended at:   Thu Oct  5 15:51:10 EDT 2006
+mri_motion_correct.fsl: done

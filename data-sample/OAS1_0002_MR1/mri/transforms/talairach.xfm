@@ -1,0 +1,9 @@
+MNI Transform File
+%Thu Oct  5 15:53:56 2006>>> /usr/pubsw/packages/mni/current/bin/minctracc -clobber -debug /tmp/mritotal_3418/src_8_dxyz.mnc /usr/pubsw/packages/mni/current/bin/../share/mni_autoreg/average_305_8_dxyz.mnc transforms/talairach.auto.xfm -transformation /tmp/mritotal_3418/src_8tmp2c.xfm -lsq9 -xcorr -model_mask /usr/pubsw/packages/mni/current/bin/../share/mni_autoreg/average_305_8_mask.mnc -center 0.723177 -7.230709 15.519408 -step 4 4 4 -tol 0.004 -simplex 2
+%(Package MNI AutoReg, version 0.98r, compiled by nicks@minerva (x86_64-unknown-linux-gnu) on 2005-11-15 at 20:38:24)
+
+Transform_Type = Linear;
+Linear_Transform =
+ 1.18018329143524 -0.0346812084317207 -0.0543977618217468 1.20966649055481
+ 0.0381512008607388 1.22094535827637 0.0492952205240726 4.58808135986328
+ 0.0604865886271 -0.0563227832317352 1.34819161891937 -28.4327545166016;

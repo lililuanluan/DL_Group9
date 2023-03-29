@@ -1,0 +1,1 @@
+mris_register -curv -reverse ../surf/rh.sphere /space/sake/19/users/freesurfer_oasis_100506/average/lh.average.curvature.filled.buckner40.tif ../surf/rh.lh.sphere.reg

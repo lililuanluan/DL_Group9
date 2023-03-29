@@ -1,0 +1,11 @@
+tkmedit started: Fri Apr 20 15:52:50 2007
+
+	tkmedit.bin -f norm.mgz -segmentation aseg_with_cc.mgz 
+
+$Id: tkmedit.c,v 1.292 2006/09/23 19:33:03 greve Exp $ $Name:  $
+Set user home dir to /autofs/space/sake_019/users/oasis/OAS1_0001_MR1/mri
+Set subject home dir to norm.mgz
+Using interface file /space/sake/19/users/freesurfer_oasis_100506/lib/tcl/tkmedit.tcl
+Tcl: Successfully parsed tkmedit.tcl
+Tcl: Successfully parsed tkm_functional.tcl
+Program terminated successfully.

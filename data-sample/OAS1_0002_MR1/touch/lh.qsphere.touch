@@ -1,0 +1,1 @@
+mris_sphere -q ../surf/lh.inflated.nofix ../surf/lh.qsphere.nofix

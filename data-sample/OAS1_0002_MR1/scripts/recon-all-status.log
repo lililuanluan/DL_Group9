@@ -1,0 +1,356 @@
+status file for recon-all
+Thu Oct  5 15:41:04 EDT 2006
+#@# MotionCor Thu Oct  5 15:41:22 EDT 2006
+#@# Nu Intensity Correction Thu Oct  5 15:51:26 EDT 2006
+#@# Talairach Thu Oct  5 15:53:19 EDT 2006
+#@# Intensity Normalization Thu Oct  5 15:53:58 EDT 2006
+#@# Skull Stripping Thu Oct  5 15:58:17 EDT 2006
+recon-all finished without error at Thu Oct  5 15:59:51 EDT 2006
+
+
+
+New invocation of recon-all 
+
+
+
+status file for recon-all
+Fri Oct  6 00:36:05 EDT 2006
+#@# EM Registration Fri Oct  6 00:36:41 EDT 2006
+#@# CA Normalize Fri Oct  6 00:48:54 EDT 2006
+#@# CA Reg Fri Oct  6 00:50:21 EDT 2006
+#@# CA Reg Inv Fri Oct  6 12:24:01 EDT 2006
+#@# Remove Neck Fri Oct  6 12:27:05 EDT 2006
+#@# SkullLTA Fri Oct  6 12:30:24 EDT 2006
+#@# SubCort Seg Fri Oct  6 12:41:36 EDT 2006
+#@# ASeg Stats Fri Oct  6 13:34:44 EDT 2006
+#@# Intensity Normalization2 Fri Oct  6 13:52:33 EDT 2006
+#@# Mask BFS Fri Oct  6 13:58:50 EDT 2006
+#@# WM Segmentation Fri Oct  6 13:58:58 EDT 2006
+#@# Fill Fri Oct  6 14:03:21 EDT 2006
+#@# Tessellate lh Fri Oct  6 14:05:44 EDT 2006
+#@# Smooth1 lh Fri Oct  6 14:05:52 EDT 2006
+#@# Inflation1 lh Fri Oct  6 14:06:01 EDT 2006
+#@# QSphere lh Fri Oct  6 14:07:35 EDT 2006
+#@# Fix Topology lh Fri Oct  6 14:32:02 EDT 2006
+#@# Make Final Surf lh Fri Oct  6 15:05:34 EDT 2006
+#@# Smooth2 lh Fri Oct  6 18:14:11 EDT 2006
+#@# Inflation2 lh Fri Oct  6 18:14:21 EDT 2006
+#@# Cortical ribbon mask lh Fri Oct  6 18:19:09 EDT 2006
+#@# Sphere lh Fri Oct  6 18:20:10 EDT 2006
+#@# Surf Reg lh Fri Oct  6 21:26:46 EDT 2006
+#@# Contra Surf Reg lh Fri Oct  6 22:49:37 EDT 2006
+#@# AvgCurv lh Sat Oct  7 00:08:04 EDT 2006
+#@# Cortical Parc lh Sat Oct  7 00:08:06 EDT 2006
+#@# Parcellation Stats lh Sat Oct  7 00:09:22 EDT 2006
+#@# Cortical Parc 2 lh Sat Oct  7 00:09:38 EDT 2006
+#@# Parcellation Stats 2 lh Sat Oct  7 00:11:16 EDT 2006
+#@# Tessellate rh Sat Oct  7 00:11:36 EDT 2006
+#@# Smooth1 rh Sat Oct  7 00:11:44 EDT 2006
+#@# Inflation1 rh Sat Oct  7 00:11:53 EDT 2006
+#@# QSphere rh Sat Oct  7 00:13:30 EDT 2006
+Linux node0139 2.6.9-34.ELsmp #1 SMP Wed Mar 8 00:27:03 CST 2006 i686 i686 i386 GNU/Linux
+
+recon-all exited with ERRORS at Sat Oct  7 00:13:30 EDT 2006
+
+
+
+
+New invocation of recon-all 
+
+
+
+status file for recon-all
+Sat Oct  7 08:57:50 EDT 2006
+#@# QSphere rh Sat Oct  7 08:57:52 EDT 2006
+#@# Fix Topology rh Sat Oct  7 09:26:26 EDT 2006
+#@# Make Final Surf rh Sat Oct  7 09:42:15 EDT 2006
+#@# Smooth2 rh Sat Oct  7 12:47:24 EDT 2006
+#@# Inflation2 rh Sat Oct  7 12:47:33 EDT 2006
+#@# Cortical ribbon mask rh Sat Oct  7 12:52:38 EDT 2006
+#@# Sphere rh Sat Oct  7 12:53:40 EDT 2006
+#@# Surf Reg rh Sat Oct  7 16:35:34 EDT 2006
+
+
+
+New invocation of recon-all 
+
+
+
+status file for recon-all
+Sat Oct  7 17:05:48 EDT 2006
+#@# QSphere rh Sat Oct  7 17:05:48 EDT 2006
+#@# Fix Topology rh Sat Oct  7 18:03:46 EDT 2006
+#@# Contra Surf Reg rh Sat Oct  7 18:04:39 EDT 2006
+Linux node0333 2.6.9-22.0.2.106.unsupportedsmp #1 SMP Fri Jan 20 04:48:30 CST 2006 x86_64 x86_64 x86_64 GNU/Linux
+
+recon-all exited with ERRORS at Sat Oct  7 18:04:42 EDT 2006
+
+#@# Make Final Surf rh Sat Oct  7 18:30:57 EDT 2006
+#@# Smooth2 rh Sun Oct  8 00:24:00 EDT 2006
+#@# Inflation2 rh Sun Oct  8 00:24:18 EDT 2006
+#@# Cortical ribbon mask rh Sun Oct  8 00:33:20 EDT 2006
+#@# Sphere rh Sun Oct  8 00:36:49 EDT 2006
+#@# Surf Reg rh Sun Oct  8 07:43:01 EDT 2006
+#@# Contra Surf Reg rh Sun Oct  8 10:43:54 EDT 2006
+#@# AvgCurv rh Sun Oct  8 13:41:38 EDT 2006
+#@# Cortical Parc rh Sun Oct  8 13:41:44 EDT 2006
+#@# Parcellation Stats rh Sun Oct  8 13:43:50 EDT 2006
+#@# Cortical Parc 2 rh Sun Oct  8 13:44:30 EDT 2006
+#@# Parcellation Stats 2 rh Sun Oct  8 13:47:05 EDT 2006
+#@# AParc-to-ASeg Sun Oct  8 13:48:02 EDT 2006
+recon-all finished without error at Sun Oct  8 13:56:14 EDT 2006
+
+
+
+New invocation of recon-all 
+
+
+
+status file for recon-all
+Tue Oct 10 14:25:19 EDT 2006
+#@# Mask BFS Tue Oct 10 14:25:19 EDT 2006
+#@# Fill Tue Oct 10 14:25:28 EDT 2006
+#@# Tessellate lh Tue Oct 10 14:27:41 EDT 2006
+#@# Smooth1 lh Tue Oct 10 14:27:50 EDT 2006
+#@# Inflation1 lh Tue Oct 10 14:27:58 EDT 2006
+#@# QSphere lh Tue Oct 10 14:29:28 EDT 2006
+
+
+
+New invocation of recon-all 
+
+
+
+status file for recon-all
+Tue Oct 10 14:48:30 EDT 2006
+#@# Mask BFS Tue Oct 10 14:48:30 EDT 2006
+#@# Fill Tue Oct 10 14:48:37 EDT 2006
+#@# Tessellate lh Tue Oct 10 14:51:00 EDT 2006
+#@# Smooth1 lh Tue Oct 10 14:51:09 EDT 2006
+#@# Inflation1 lh Tue Oct 10 14:51:18 EDT 2006
+#@# QSphere lh Tue Oct 10 14:52:55 EDT 2006
+#@# Fix Topology lh Tue Oct 10 15:17:46 EDT 2006
+#@# Make Final Surf lh Tue Oct 10 15:31:36 EDT 2006
+#@# Smooth2 lh Tue Oct 10 18:45:12 EDT 2006
+#@# Inflation2 lh Tue Oct 10 18:45:21 EDT 2006
+#@# Cortical ribbon mask lh Tue Oct 10 18:50:21 EDT 2006
+#@# Sphere lh Tue Oct 10 18:51:23 EDT 2006
+#@# Surf Reg lh Tue Oct 10 21:52:04 EDT 2006
+#@# Contra Surf Reg lh Tue Oct 10 23:13:37 EDT 2006
+#@# AvgCurv lh Wed Oct 11 00:44:09 EDT 2006
+#@# Cortical Parc lh Wed Oct 11 00:44:11 EDT 2006
+#@# Parcellation Stats lh Wed Oct 11 00:45:23 EDT 2006
+#@# Cortical Parc 2 lh Wed Oct 11 00:45:39 EDT 2006
+#@# Parcellation Stats 2 lh Wed Oct 11 00:47:10 EDT 2006
+#@# Tessellate rh Wed Oct 11 00:47:29 EDT 2006
+#@# Smooth1 rh Wed Oct 11 00:47:39 EDT 2006
+#@# Inflation1 rh Wed Oct 11 00:47:47 EDT 2006
+#@# QSphere rh Wed Oct 11 00:49:36 EDT 2006
+#@# Fix Topology rh Wed Oct 11 01:17:45 EDT 2006
+#@# Make Final Surf rh Wed Oct 11 01:23:54 EDT 2006
+#@# Smooth2 rh Wed Oct 11 08:17:57 EDT 2006
+#@# Inflation2 rh Wed Oct 11 08:18:06 EDT 2006
+#@# Cortical ribbon mask rh Wed Oct 11 08:23:10 EDT 2006
+#@# Sphere rh Wed Oct 11 08:24:11 EDT 2006
+#@# Surf Reg rh Wed Oct 11 12:12:25 EDT 2006
+
+
+
+New invocation of recon-all 
+
+
+
+status file for recon-all
+Wed Oct 11 13:19:20 EDT 2006
+#@# Mask BFS Wed Oct 11 13:19:21 EDT 2006
+
+
+
+New invocation of recon-all 
+
+
+
+status file for recon-all
+Wed Oct 11 13:19:28 EDT 2006
+#@# Mask BFS Wed Oct 11 13:19:28 EDT 2006
+#@# Tessellate lh Wed Oct 11 13:19:30 EDT 2006
+#@# Tessellate rh Wed Oct 11 13:19:36 EDT 2006
+#@# Smooth1 lh Wed Oct 11 13:19:38 EDT 2006
+#@# Smooth1 rh Wed Oct 11 13:19:45 EDT 2006
+#@# Inflation1 lh Wed Oct 11 13:19:46 EDT 2006
+#@# Inflation1 rh Wed Oct 11 13:19:53 EDT 2006
+#@# QSphere lh Wed Oct 11 13:21:21 EDT 2006
+#@# QSphere rh Wed Oct 11 13:21:28 EDT 2006
+#@# Contra Surf Reg rh Wed Oct 11 13:38:53 EDT 2006
+#@# Fix Topology lh Wed Oct 11 13:46:33 EDT 2006
+#@# Fix Topology rh Wed Oct 11 13:46:38 EDT 2006
+#@# Make Final Surf rh Wed Oct 11 13:52:26 EDT 2006
+#@# Make Final Surf lh Wed Oct 11 13:58:36 EDT 2006
+Linux node0375 2.6.9-22.0.2.106.unsupportedsmp #1 SMP Fri Jan 20 04:48:30 CST 2006 x86_64 x86_64 x86_64 GNU/Linux
+
+recon-all exited with ERRORS at Wed Oct 11 14:20:48 EDT 2006
+
+#@# Smooth2 rh Wed Oct 11 16:40:08 EDT 2006
+#@# Inflation2 rh Wed Oct 11 16:40:16 EDT 2006
+#@# Smooth2 lh Wed Oct 11 16:42:18 EDT 2006
+#@# Inflation2 lh Wed Oct 11 16:42:26 EDT 2006
+#@# Cortical ribbon mask rh Wed Oct 11 16:45:02 EDT 2006
+#@# Sphere rh Wed Oct 11 16:45:58 EDT 2006
+#@# Cortical ribbon mask lh Wed Oct 11 16:46:57 EDT 2006
+#@# Sphere lh Wed Oct 11 16:47:53 EDT 2006
+#@# Surf Reg rh Wed Oct 11 19:43:59 EDT 2006
+#@# Surf Reg lh Wed Oct 11 20:07:28 EDT 2006
+#@# Contra Surf Reg rh Wed Oct 11 21:00:33 EDT 2006
+#@# Contra Surf Reg lh Wed Oct 11 21:25:50 EDT 2006
+#@# AvgCurv rh Wed Oct 11 22:17:29 EDT 2006
+#@# Cortical Parc rh Wed Oct 11 22:17:30 EDT 2006
+#@# Parcellation Stats rh Wed Oct 11 22:18:37 EDT 2006
+#@# Cortical Parc 2 rh Wed Oct 11 22:18:52 EDT 2006
+#@# Parcellation Stats 2 rh Wed Oct 11 22:20:15 EDT 2006
+#@# AParc-to-ASeg Wed Oct 11 22:20:33 EDT 2006
+recon-all finished without error at Wed Oct 11 22:22:02 EDT 2006
+#@# AvgCurv lh Wed Oct 11 22:51:15 EDT 2006
+#@# Cortical Parc lh Wed Oct 11 22:51:17 EDT 2006
+#@# Parcellation Stats lh Wed Oct 11 22:52:19 EDT 2006
+#@# Cortical Parc 2 lh Wed Oct 11 22:52:34 EDT 2006
+#@# Parcellation Stats 2 lh Wed Oct 11 22:53:56 EDT 2006
+#@# AParc-to-ASeg Wed Oct 11 22:54:13 EDT 2006
+recon-all finished without error at Wed Oct 11 22:55:50 EDT 2006
+
+
+
+New invocation of recon-all 
+
+
+
+status file for recon-all
+Mon Oct 16 19:59:15 EDT 2006
+#@# Mask BFS Mon Oct 16 19:59:15 EDT 2006
+#@# Fill Mon Oct 16 19:59:31 EDT 2006
+#@# Tessellate lh Mon Oct 16 20:04:38 EDT 2006
+#@# Smooth1 lh Mon Oct 16 20:04:55 EDT 2006
+#@# Inflation1 lh Mon Oct 16 20:05:12 EDT 2006
+#@# QSphere lh Mon Oct 16 20:09:06 EDT 2006
+#@# Fix Topology lh Mon Oct 16 21:05:38 EDT 2006
+#@# Make Final Surf lh Mon Oct 16 21:28:04 EDT 2006
+#@# Smooth2 lh Tue Oct 17 03:08:07 EDT 2006
+#@# Inflation2 lh Tue Oct 17 03:08:24 EDT 2006
+#@# Cortical ribbon mask lh Tue Oct 17 03:17:08 EDT 2006
+#@# Sphere lh Tue Oct 17 03:20:35 EDT 2006
+#@# Surf Reg lh Tue Oct 17 08:19:59 EDT 2006
+#@# Contra Surf Reg lh Tue Oct 17 11:05:03 EDT 2006
+#@# AvgCurv lh Tue Oct 17 14:07:17 EDT 2006
+#@# Cortical Parc lh Tue Oct 17 14:07:23 EDT 2006
+#@# Parcellation Stats lh Tue Oct 17 14:09:22 EDT 2006
+#@# Cortical Parc 2 lh Tue Oct 17 14:10:02 EDT 2006
+#@# Parcellation Stats 2 lh Tue Oct 17 14:12:27 EDT 2006
+#@# Tessellate rh Tue Oct 17 14:13:23 EDT 2006
+#@# Smooth1 rh Tue Oct 17 14:13:39 EDT 2006
+#@# Inflation1 rh Tue Oct 17 14:13:57 EDT 2006
+#@# QSphere rh Tue Oct 17 14:17:55 EDT 2006
+#@# Fix Topology rh Tue Oct 17 15:15:13 EDT 2006
+#@# Make Final Surf rh Tue Oct 17 15:25:31 EDT 2006
+#@# Smooth2 rh Tue Oct 17 21:11:58 EDT 2006
+#@# Inflation2 rh Tue Oct 17 21:12:16 EDT 2006
+#@# Cortical ribbon mask rh Tue Oct 17 21:21:07 EDT 2006
+#@# Sphere rh Tue Oct 17 21:24:35 EDT 2006
+#@# Surf Reg rh Wed Oct 18 04:05:40 EDT 2006
+#@# Contra Surf Reg rh Wed Oct 18 06:54:24 EDT 2006
+#@# AvgCurv rh Wed Oct 18 09:47:40 EDT 2006
+#@# Cortical Parc rh Wed Oct 18 09:47:45 EDT 2006
+#@# Parcellation Stats rh Wed Oct 18 09:49:50 EDT 2006
+#@# Cortical Parc 2 rh Wed Oct 18 09:50:30 EDT 2006
+#@# Parcellation Stats 2 rh Wed Oct 18 09:53:02 EDT 2006
+#@# AParc-to-ASeg Wed Oct 18 09:53:59 EDT 2006
+recon-all finished without error at Wed Oct 18 10:02:07 EDT 2006
+
+
+
+New invocation of recon-all 
+
+
+
+status file for recon-all
+Wed Oct 18 13:15:40 EDT 2006
+#@# Mask BFS Wed Oct 18 13:15:40 EDT 2006
+#@# Fill Wed Oct 18 13:15:56 EDT 2006
+#@# Tessellate lh Wed Oct 18 13:21:04 EDT 2006
+#@# Smooth1 lh Wed Oct 18 13:21:20 EDT 2006
+#@# Inflation1 lh Wed Oct 18 13:21:37 EDT 2006
+#@# QSphere lh Wed Oct 18 13:25:28 EDT 2006
+#@# Fix Topology lh Wed Oct 18 14:20:43 EDT 2006
+#@# Make Final Surf lh Wed Oct 18 14:42:05 EDT 2006
+#@# Smooth2 lh Wed Oct 18 20:18:24 EDT 2006
+#@# Inflation2 lh Wed Oct 18 20:18:41 EDT 2006
+#@# Cortical ribbon mask lh Wed Oct 18 20:27:12 EDT 2006
+#@# Sphere lh Wed Oct 18 20:30:38 EDT 2006
+#@# Surf Reg lh Thu Oct 19 02:12:56 EDT 2006
+#@# Contra Surf Reg lh Thu Oct 19 05:03:38 EDT 2006
+#@# AvgCurv lh Thu Oct 19 08:07:37 EDT 2006
+#@# Cortical Parc lh Thu Oct 19 08:07:42 EDT 2006
+#@# Parcellation Stats lh Thu Oct 19 08:09:34 EDT 2006
+#@# Cortical Parc 2 lh Thu Oct 19 08:10:13 EDT 2006
+#@# Parcellation Stats 2 lh Thu Oct 19 08:12:34 EDT 2006
+#@# Tessellate rh Thu Oct 19 08:13:29 EDT 2006
+#@# Smooth1 rh Thu Oct 19 08:13:45 EDT 2006
+#@# Inflation1 rh Thu Oct 19 08:14:03 EDT 2006
+#@# QSphere rh Thu Oct 19 08:17:58 EDT 2006
+#@# Fix Topology rh Thu Oct 19 09:13:58 EDT 2006
+#@# Make Final Surf rh Thu Oct 19 09:22:19 EDT 2006
+#@# Smooth2 rh Thu Oct 19 15:01:26 EDT 2006
+#@# Inflation2 rh Thu Oct 19 15:01:43 EDT 2006
+#@# Cortical ribbon mask rh Thu Oct 19 15:10:25 EDT 2006
+#@# Sphere rh Thu Oct 19 15:13:51 EDT 2006
+#@# Surf Reg rh Thu Oct 19 19:14:14 EDT 2006
+#@# Contra Surf Reg rh Thu Oct 19 22:05:23 EDT 2006
+#@# AvgCurv rh Fri Oct 20 00:54:22 EDT 2006
+#@# Cortical Parc rh Fri Oct 20 00:54:27 EDT 2006
+#@# Parcellation Stats rh Fri Oct 20 00:56:23 EDT 2006
+#@# Cortical Parc 2 rh Fri Oct 20 00:57:02 EDT 2006
+#@# Parcellation Stats 2 rh Fri Oct 20 00:59:29 EDT 2006
+#@# AParc-to-ASeg Fri Oct 20 01:00:25 EDT 2006
+recon-all finished without error at Fri Oct 20 01:08:32 EDT 2006
+
+
+
+New invocation of recon-all 
+
+
+
+status file for recon-all
+Wed Apr 25 09:09:06 EDT 2007
+#@# ASeg Stats Wed Apr 25 09:09:06 EDT 2007
+
+
+
+New invocation of recon-all 
+
+
+
+status file for recon-all
+Wed Apr 25 09:24:06 EDT 2007
+#@# ASeg Stats Wed Apr 25 09:24:06 EDT 2007
+recon-all finished without error at Wed Apr 25 09:30:00 EDT 2007
+
+
+
+New invocation of recon-all 
+
+
+
+status file for recon-all
+Wed Apr 25 09:38:22 EDT 2007
+#@# ASeg Stats Wed Apr 25 09:38:22 EDT 2007
+recon-all finished without error at Wed Apr 25 09:53:54 EDT 2007
+recon-all finished without error at Wed Apr 25 10:02:34 EDT 2007
+
+
+
+New invocation of recon-all 
+
+
+
+status file for recon-all
+Wed Apr 25 10:45:54 EDT 2007
+#@# ASeg Stats Wed Apr 25 10:45:54 EDT 2007
+recon-all finished without error at Wed Apr 25 10:45:54 EDT 2007

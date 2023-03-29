@@ -1,0 +1,2 @@
+mri_segment -wm_low 80 -gray_hi 85
+mris_make_surfaces -min_border_white 80 -max_gray 85 

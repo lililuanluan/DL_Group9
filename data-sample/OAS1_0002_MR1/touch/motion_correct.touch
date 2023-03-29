@@ -1,0 +1,1 @@
+mri_motion_correct.fsl -o /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/rawavg.mgz -wild /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/001.mgz /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/002.mgz /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/003.mgz /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig/004.mgz

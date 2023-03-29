@@ -1,0 +1,1 @@
+mri_ca_register -align -mask brainmask.mgz -T transforms/talairach.lta norm.mgz /space/sake/19/users/freesurfer_oasis_100506/average/RB_all_2006-02-15.gca transforms/talairach.m3z

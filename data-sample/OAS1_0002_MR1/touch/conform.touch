@@ -1,0 +1,1 @@
+mri_convert /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/rawavg.mgz /autofs/space/sake_019/users/oasis/OAS1_0002_MR1/mri/orig.mgz --conform
