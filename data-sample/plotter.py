@@ -5,7 +5,7 @@ from os import walk
 import glob
 import skimage.transform as skTrans
 
-path = "*.mgz"
+path = "./images/*.gz"
 files = glob.glob(path)
 for path in files:
     print("filename=",path)
@@ -13,7 +13,7 @@ for path in files:
     
     X = X.get_fdata()
     # X = skTrans.resize(X, (160, 192, 144), order=1, preserve_range=True)
-    # print(X)
+    print(X)
     print("X.shape=",np.shape(X))
 
     for i in range(29):

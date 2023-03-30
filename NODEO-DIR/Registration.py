@@ -107,8 +107,8 @@ def evaluation(config, device, df, df_with_grid):
     print('Ratio of neg Jet: ', ratio_neg_J)
     ### Calculate Dice
     label = [2, 3, 4, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 24, 28, 41, 42, 43, 46, 47, 49, 50, 51, 52, 53, 54, 60]
-    fixed_seg = load_nii(config.fixed_seg)
-    moving_seg = load_nii(config.moving_seg)
+    fixed_seg = load_nii_2(config.fixed_seg)
+    moving_seg = load_nii_2(config.moving_seg)
     ST_seg = SpatialTransformer(fixed_seg.shape, mode='nearest').to(device)
     moving_seg = torch.from_numpy(moving_seg).to(device).float()
     # make batch dimension
