@@ -65,7 +65,7 @@ def load_nii(path):
 def load_nii_2(path):
     X = nib.load(path)    
     X = X.get_fdata()
-    X= X[:,:,40:184];
+    X= X[:,:,40:184]
     return X
 
 def save_nii(img, savename):
