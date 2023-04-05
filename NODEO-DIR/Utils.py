@@ -91,13 +91,13 @@ def dice(array1, array2, labels):
     dicem = np.zeros(len(labels))
     for idx, label in enumerate(labels):
         top = 2 * np.sum(np.logical_and(array1 == label, array2 == label))
-        print("top is",top);
+        #print("top is",top);
         bottom = np.sum(array1 == label) + np.sum(array2 == label)
-        print("bottom isv1",bottom);
+        #print("bottom isv1",bottom);
         bottom = np.maximum(bottom, np.finfo(float).eps)  # add epsilon
-        print("bottom isv2",bottom);
+        #print("bottom isv2",bottom);
         dicem[idx] = top / bottom
-        print("dicem is",dicem);
+        #print("dicem is",dicem);
     return dicem
 
 
