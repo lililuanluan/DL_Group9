@@ -1,6 +1,7 @@
 import torch
 import torch.nn.functional as F
 import numpy as np
+from Utils import *
 
 class NCC(torch.nn.Module):
     """
@@ -192,30 +193,28 @@ def magnitude_loss(all_v):
     all_v_magnitude = torch.mean(all_v_x_2 + all_v_y_2 + all_v_z_2)
     return all_v_magnitude
 
-
-
-if __name__ == '__main__':
-    from Utils import *
+def test_ncc():
+    
 
     # -----------------debugging 3D----------------
     # fixed_path = '../data-sample/images/aligned_norm.nii.gz'
     # fixed = load_nii_2(fixed_path)
-    # print("fixed shape=", fixed)
-    fixed = np.random.randint(0, high=10, size=(2,2,2))
-    print("fixed=", fixed)
-    # fixed = fixed[:,:,1]
-    # print("fixed(one slice) shape=", fixed.shape)
-    device = torch.device('cuda:0')
-    fixed = torch.from_numpy(fixed).to(device).float()
-    print("fixed(to tensor) shape=", fixed.shape)
-    fixed = fixed.unsqueeze(0).unsqueeze(0)
-    print("fixed(unsqueeze) shape=", fixed.shape)
-    loss_NCC = NCC(win=1) # also mentioned in the paper
-    loss_sim = loss_NCC(fixed, fixed)
-    print("loss_sim", loss_sim)
+    # # print("fixed shape=", fixed)
+    # # fixed = np.random.randint(0, high=10, size=(2,2,2))
+    # print("fixed=", fixed)
+    # # fixed = fixed[:,:,1]
+    # # print("fixed(one slice) shape=", fixed.shape)
+    # device = torch.device('cuda:0')
+    # fixed = torch.from_numpy(fixed).to(device).float()
+    # print("fixed(to tensor) shape=", fixed.shape)
+    # fixed = fixed.unsqueeze(0).unsqueeze(0)
+    # print("fixed(unsqueeze) shape=", fixed.shape)
+    # loss_NCC = NCC(win=1) # also mentioned in the paper
+    # loss_sim = loss_NCC(fixed, fixed)
+    # print("loss_sim", loss_sim)
 
 
-    # -----------------testing 3D----------------
+    # -----------------testing 2D----------------
     fixed_path = '../data-sample/images/aligned_norm.nii.gz'
     fixed = load_nii_2(fixed_path)
     print("fixed shape=", fixed.shape)
@@ -229,3 +228,6 @@ if __name__ == '__main__':
     loss_NCC = NCC_2D(win=21) # also mentioned in the paper
     loss_sim = loss_NCC(fixed, fixed)
     print("loss_sim", loss_sim)
+
+if __name__ == '__main__':
+    test_ncc()
