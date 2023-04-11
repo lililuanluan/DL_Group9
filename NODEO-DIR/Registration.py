@@ -75,11 +75,13 @@ def registration(config, device, moving, fixed):
     BEST_loss_sim_loss_J = 1000
     for i in range(config.epoches):
         all_phi = ode_train(grid, Tensor(np.arange(config.time_steps)), return_whole_sequence=True)
+
         all_v = all_phi[1:] - all_phi[:-1]
         all_phi = (all_phi + 1.) / 2. * scale_factor  # [-1, 1] -> voxel spacing
         phi = all_phi[-1]
         grid_voxel = (grid + 1.) / 2. * scale_factor  # [-1, 1] -> voxel spacing
         df = phi - grid_voxel  # with grid -> without grid
+        print(df.shape)
         warped_moving, df_with_grid = ST(moving, df, return_phi=True)
         # similarity loss
         loss_sim = loss_NCC(warped_moving, fixed)
@@ -88,6 +90,7 @@ def registration(config, device, moving, fixed):
         loss_v = config.lambda_v * magnitude_loss(all_v)
         # neg Jacobian loss
         loss_J = config.lambda_J * neg_Jdet_loss(df_with_grid)
+
         # phi dphi/dx loss
         loss_df = config.lambda_df * smoothloss_loss(df)
         loss = loss_sim + loss_v + loss_J + loss_df
