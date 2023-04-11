@@ -189,7 +189,7 @@ class BrainNet_2D(ODEF):
     def forward(self, x):
 
         imgx = self.img_sz[0] # 160
-        #imgy = self.img_sz[1] # 192
+        imgy = self.img_sz[1] # 192
         # print("imgx=",imgx, "imgy=", imgy, "imgz=", imgz)
         print("x.shape", x.shape) # 1, 3, 160, 192
         # x = self.relu(self.enc_conv1(x))
@@ -214,7 +214,7 @@ class BrainNet_2D(ODEF):
         x = x.view(1, 3, int(math.ceil(imgx / pow(2, self.ds))), int(math.ceil(imgy / pow(2, self.ds)))) # 1, 3, 40, 48
         # print("x.shape x.view(1, 3...)", x.shape)
         for _ in range(self.ds):
-            x = F.upsample(x, scale_factor=2, mode='trilinear') # 1, 3, 160, 192
+            x = F.upsample(x, scale_factor=2, mode='nearest') # 1, 3, 160, 192
         # print("x.shape F.upsample(x...)", x.shape)
         # Apply Gaussian/Averaging smoothing
         for _ in range(self.smoothing_pass):
