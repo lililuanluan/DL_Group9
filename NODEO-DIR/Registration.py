@@ -1,17 +1,18 @@
 import argparse
 import os
 import time
-from Network import BrainNet
+from Network import BrainNet, BrainNet_2D
 from Loss import *
 from NeuralODE import *
 from Utils import *
+
 
 def main(config):
     device = torch.device(config.device)
     # fixed = load_nii(config.fixed)
     # moving = load_nii(config.moving)
-    fixed = load_nii_2(config.fixed)
-    moving = load_nii_2(config.moving)
+    fixed = load_nii_2(config.fixed, config.twod)
+    moving = load_nii_2(config.moving, config.twod)
     assert fixed.shape == moving.shape  # two images to be registered must in the same size
     t = time.time()
     df, df_with_grid, warped_moving = registration(config, device, moving, fixed)
@@ -35,28 +36,38 @@ def registration(config, device, moving, fixed):
     :return all_phi: Displacement field for all time steps.
     '''
     im_shape = fixed.shape
-    moving = torch.from_numpy(moving).to(device).float() # 160, 192, 144
+    moving = torch.from_numpy(moving).to(device).float()  # 160, 192, 144
     fixed = torch.from_numpy(fixed).to(device).float()
     # make batch dimension
     print("moving.shape", moving.shape)
-    moving = moving.unsqueeze(0).unsqueeze(0) #1, 1, 160, 192, 144
-    # print("after unsqueeze moving.shape", moving.shape) 
+    moving = moving.unsqueeze(0).unsqueeze(0)  # 1, 1, 160, 192, 144
+    print("after unsqueeze moving.shape", moving.shape)
     fixed = fixed.unsqueeze(0).unsqueeze(0)
-
-    Network = BrainNet(img_sz=im_shape,
-                       smoothing_kernel=config.smoothing_kernel,
-                       smoothing_win=config.smoothing_win,
-                       smoothing_pass=config.smoothing_pass,
-                       ds=config.ds,
-                       bs=config.bs
-                       ).to(device)
-
+    if not config.twod:
+        Network = BrainNet(img_sz=im_shape,
+                           smoothing_kernel=config.smoothing_kernel,
+                           smoothing_win=config.smoothing_win,
+                           smoothing_pass=config.smoothing_pass,
+                           ds=config.ds,
+                           bs=config.bs
+                           ).to(device)
+    else:
+        Network = BrainNet_2D(img_sz=im_shape,
+                              smoothing_kernel=config.smoothing_kernel,
+                              smoothing_win=config.smoothing_win,
+                              smoothing_pass=config.smoothing_pass,
+                              ds=config.ds,
+                              bs=config.bs
+                              ).to(device)
     ode_train = NeuralODE(Network, config.optimizer, config.STEP_SIZE).to(device)
-
     # training loop
-    scale_factor = torch.tensor(im_shape).to(device).view(1, 3, 1, 1, 1) * 1.
+    if config.twod:
+        scale_factor = torch.tensor(im_shape).to(device).view(1, 2, 1, 1, 1) * 1.
+        grid = generate_grid2D_tensor(im_shape).unsqueeze(0).to(device)  # [-1,1]
+    else:
+        scale_factor = torch.tensor(im_shape).to(device).view(1, 3, 1, 1, 1) * 1.
+        grid = generate_grid3D_tensor(im_shape).unsqueeze(0).to(device)  # [-1,1]
     ST = SpatialTransformer(im_shape).to(device)  # spatial transformer to warp image
-    grid = generate_grid3D_tensor(im_shape).unsqueeze(0).to(device)  # [-1,1]
 
     # Define optimizer
     optimizer = torch.optim.Adam(ode_train.parameters(), lr=config.lr, amsgrad=True)
@@ -107,8 +118,8 @@ def evaluation(config, device, df, df_with_grid):
     print('Ratio of neg Jet: ', ratio_neg_J)
     ### Calculate Dice
     label = [2, 3, 4, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 24, 28, 41, 42, 43, 46, 47, 49, 50, 51, 52, 53, 54, 60]
-    fixed_seg = load_nii_2(config.fixed_seg)
-    moving_seg = load_nii_2(config.moving_seg)
+    fixed_seg = load_nii_2(config.fixed_seg, config.twod)
+    moving_seg = load_nii_2(config.moving_seg, config.twod)
     ST_seg = SpatialTransformer(fixed_seg.shape, mode='nearest').to(device)
     moving_seg = torch.from_numpy(moving_seg).to(device).float()
     # make batch dimension
@@ -117,12 +128,17 @@ def evaluation(config, device, df, df_with_grid):
     dice_move2fix = dice(warped_seg.unsqueeze(0).unsqueeze(0).detach().cpu().numpy(), fixed_seg, label)
     print('Avg. dice on %d structures: ' % len(label), np.mean(dice_move2fix[0]))
 
+
 def save_result(config, df, warped_moving):
-    save_nii(df.permute(2,3,4,0,1).detach().cpu().numpy(), '%s/df.nii.gz' % (config.savepath))
+    save_nii(df.permute(2, 3, 4, 0, 1).detach().cpu().numpy(), '%s/df.nii.gz' % (config.savepath))
     save_nii(warped_moving.detach().cpu().numpy(), '%s/warped.nii.gz' % (config.savepath))
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    parser.add_argument("--twod", type=bool,
+                        dest="twod", default=False,
+                        help="option to run 2d registration,false to run in 3d")
     # File path
     parser.add_argument("--savepath", type=str,
                         dest="savepath", default='./result',

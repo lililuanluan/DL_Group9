@@ -43,6 +43,7 @@ def Euler(z0, n_steps, f, step_size):
 
 class ODEF(nn.Module):
     def forward_with_grad(self, z, grad_outputs):
+
         """Compute f and a df/dz, a df/dp, a df/dt"""
         batch_size = z.shape[0]
         out = self.forward(z)
@@ -75,7 +76,6 @@ class ODEAdjoint(torch.autograd.Function):
         assert isinstance(func, ODEF)
         bs, *z_shape = z0.size()
         time_len = t.size(0)
-
         with torch.no_grad():
             # initialize z to len of time and type of z0
             z = torch.zeros(time_len, bs, *z_shape).to(z0)

@@ -157,3 +157,73 @@ class BrainNet(ODEF):
                 x = torch.cat([x_x, x_y, x_z], 1) # 1, 3, 160, 192, 144
         # print("x.shape after smoothing", x.shape)
         return x
+class BrainNet_2D(ODEF):
+    #input:imgsz:160*192 (3channels)
+    def __init__(self, img_sz, smoothing_kernel, smoothing_win, smoothing_pass, ds, bs):
+        super(BrainNet_2D, self).__init__()
+        padding_mode = 'zeros'
+        bias = True
+        self.ds = ds
+        self.bs = bs
+        self.img_sz = img_sz
+        self.smoothing_kernel = smoothing_kernel
+        self.smoothing_pass = smoothing_pass
+        # self.enc_conv1 = nn.Conv3d(3, 32, kernel_size=3, stride=2, padding=1, padding_mode=padding_mode, bias=bias)
+        self.enc_conv2 = nn.Conv2d(2, 32, kernel_size=3, stride=2, padding=1, padding_mode=padding_mode, bias=bias)
+        self.enc_conv3 = nn.Conv2d(32, 32, kernel_size=3, stride=2, padding=1, padding_mode=padding_mode, bias=bias)
+        self.enc_conv4 = nn.Conv2d(32, 32, kernel_size=3, stride=2, padding=1, padding_mode=padding_mode, bias=bias)
+        self.enc_conv5 = nn.Conv2d(32, 32, kernel_size=3, stride=2, padding=1, padding_mode=padding_mode, bias=bias)
+        self.enc_conv6 = nn.Conv2d(32, 32, kernel_size=3, stride=2, padding=1, padding_mode=padding_mode, bias=bias)
+        self.bottleneck_sz = int(
+            math.ceil(img_sz[0] / pow(2, self.ds)) * math.ceil(img_sz[1] / pow(2, self.ds)))
+        self.lin1 = nn.Linear(288, self.bs, bias=bias)
+        self.lin2 = nn.Linear(self.bs, self.bottleneck_sz * 3, bias=bias)
+        self.relu = nn.ReLU()
+
+        # Create smoothing kernels
+        if self.smoothing_kernel == 'AK':
+            self.sk = AveragingKernel(win=smoothing_win)
+        else:
+            self.sk = GaussianKernel(win=smoothing_win, nsig=0.1)
+
+    def forward(self, x):
+
+        imgx = self.img_sz[0] # 160
+        #imgy = self.img_sz[1] # 192
+        # print("imgx=",imgx, "imgy=", imgy, "imgz=", imgz)
+        print("x.shape", x.shape) # 1, 3, 160, 192
+        # x = self.relu(self.enc_conv1(x))
+        x = F.interpolate(x, scale_factor=0.5, mode='nearest')  # Optional to downsample the image
+        print("x.shape after downsample", x.shape) # 1, 3, 80, 96 # sample 1 over 2
+        x = self.relu(self.enc_conv2(x)) # 1, 32, 40, 48
+
+        print("x.shape relu(self.enc_conv2(x)", x.shape)
+        x = self.relu(self.enc_conv3(x)) # 1, 32, 20, 24
+        # print("x.shape relu(self.enc_conv3(x)", x.shape)
+        x = self.relu(self.enc_conv4(x)) # 1, 32, 10, 12
+        # print("x.shape relu(self.enc_conv4(x)", x.shape)
+        x = self.relu(self.enc_conv5(x)) # 1, 32, 5, 6
+        # print("x.shape relu(self.enc_conv5(x)", x.shape)
+        x = self.enc_conv6(x) # 1, 32, 3, 3
+        # print("x.shape enc_conv6(x)", x.shape)
+        x = x.view(-1) # 864 view is like reshape
+        # print("x.shape view(-1)", x.shape)
+        x = self.relu(self.lin1(x))
+        x = self.lin2(x)
+        # print("x.shape lin1, lin2", x.shape)
+        x = x.view(1, 3, int(math.ceil(imgx / pow(2, self.ds))), int(math.ceil(imgy / pow(2, self.ds)))) # 1, 3, 40, 48
+        # print("x.shape x.view(1, 3...)", x.shape)
+        for _ in range(self.ds):
+            x = F.upsample(x, scale_factor=2, mode='trilinear') # 1, 3, 160, 192
+        # print("x.shape F.upsample(x...)", x.shape)
+        # Apply Gaussian/Averaging smoothing
+        for _ in range(self.smoothing_pass):
+            if self.smoothing_kernel == 'AK':
+                x = self.sk(x)
+            else:
+                x_x = self.sk(x[:, 0, :, :, :].unsqueeze(1))
+                x_y = self.sk(x[:, 1, :, :, :].unsqueeze(1))
+                x_z = self.sk(x[:, 2, :, :, :].unsqueeze(1))
+                x = torch.cat([x_x, x_y, x_z], 1) # 1, 3, 160, 192, 144
+        # print("x.shape after smoothing", x.shape)
+        return x
