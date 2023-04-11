@@ -77,11 +77,15 @@ def registration(config, device, moving, fixed):
         all_phi = ode_train(grid, Tensor(np.arange(config.time_steps)), return_whole_sequence=True)
 
         all_v = all_phi[1:] - all_phi[:-1]
+        #print(all_v.shape) # [1, 1, 3, 160, 192, 144]
         all_phi = (all_phi + 1.) / 2. * scale_factor  # [-1, 1] -> voxel spacing
+        print("all_phi:",all_phi.shape)
         phi = all_phi[-1]
+        print("phi:",phi.shape)
         grid_voxel = (grid + 1.) / 2. * scale_factor  # [-1, 1] -> voxel spacing
+        print("grid_voxel:",grid_voxel.shape)
         df = phi - grid_voxel  # with grid -> without grid
-        print(df.shape)
+
         warped_moving, df_with_grid = ST(moving, df, return_phi=True)
         # similarity loss
         loss_sim = loss_NCC(warped_moving, fixed)
