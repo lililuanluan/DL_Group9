@@ -51,6 +51,8 @@ def registration(config, device, moving, fixed):
                            ds=config.ds,
                            bs=config.bs
                            ).to(device)
+        loss_NCC = NCC(win=config.NCC_win)
+        grid = generate_grid3D_tensor(im_shape).unsqueeze(0).to(device)  # [-1,1]
     else:
         Network = BrainNet_2D(img_sz=im_shape,
                               smoothing_kernel=config.smoothing_kernel,
@@ -59,31 +61,27 @@ def registration(config, device, moving, fixed):
                               ds=config.ds,
                               bs=config.bs
                               ).to(device)
+        loss_NCC = NCC_2D(win=config.NCC_win)
+        grid = generate_grid2D_tensor(im_shape).unsqueeze(0).to(device)  # [-1,1]
     ode_train = NeuralODE(Network, config.optimizer, config.STEP_SIZE).to(device)
     # training loop
-    if config.twod:
-        scale_factor = torch.tensor(im_shape).to(device).view(1, 2, 1, 1, 1) * 1.
-        grid = generate_grid2D_tensor(im_shape).unsqueeze(0).to(device)  # [-1,1]
-    else:
-        scale_factor = torch.tensor(im_shape).to(device).view(1, 3, 1, 1, 1) * 1.
-        grid = generate_grid3D_tensor(im_shape).unsqueeze(0).to(device)  # [-1,1]
     ST = SpatialTransformer(im_shape).to(device)  # spatial transformer to warp image
-
     # Define optimizer
     optimizer = torch.optim.Adam(ode_train.parameters(), lr=config.lr, amsgrad=True)
-    loss_NCC = NCC(win=config.NCC_win)
     BEST_loss_sim_loss_J = 1000
     for i in range(config.epoches):
         all_phi = ode_train(grid, Tensor(np.arange(config.time_steps)), return_whole_sequence=True)
-
+        # print("all_phi first:",all_phi.shape) #all_phi: torch.Size([2, 1, 3, 160, 192, 144])
         all_v = all_phi[1:] - all_phi[:-1]
-        #print(all_v.shape) # [1, 1, 3, 160, 192, 144]
-        all_phi = (all_phi + 1.) / 2. * scale_factor  # [-1, 1] -> voxel spacing
-        print("all_phi:",all_phi.shape)
+        # print("all_v",all_v.shape) # [1, 1, 3, 160, 192, 144]
+        all_phi = (all_phi + 1.) / 2. * 200  # [-1, 1] -> voxel spacing, change to a fixed scale
+        # print("all_phi:",all_phi.shape) #all_phi: torch.Size([2, 1, 3, 160, 192, 144])
+
         phi = all_phi[-1]
-        print("phi:",phi.shape)
-        grid_voxel = (grid + 1.) / 2. * scale_factor  # [-1, 1] -> voxel spacing
-        print("grid_voxel:",grid_voxel.shape)
+        # print("phi:",phi.shape) #phi: torch.Size([1, 3, 160, 192, 144])
+
+        grid_voxel = (grid + 1.) / 2. * 200  # [-1, 1] -> voxel spacing,change to a fixed scale
+        # print("grid_voxel:",grid_voxel.shape) # [1, 3, 160, 192, 144]
         df = phi - grid_voxel  # with grid -> without grid
 
         warped_moving, df_with_grid = ST(moving, df, return_phi=True)
