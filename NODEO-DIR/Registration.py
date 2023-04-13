@@ -6,6 +6,7 @@ from Loss import *
 from NeuralODE import *
 from Utils import *
 import matplotlib.pyplot as plt
+from matplotlib import image
 
 def main(config):
     device = torch.device(config.device)
@@ -21,8 +22,11 @@ def main(config):
     print('---Registration DONE---')
     evaluation(config, device, df, df_with_grid)
     print('---Evaluation DONE---')
-    save_result(config, df, warped_moving)
+    # save_result(config, df, warped_moving)
     print('---Results Saved---')
+
+
+    
 
 
 def registration(config, device, moving, fixed):
@@ -65,7 +69,7 @@ def registration(config, device, moving, fixed):
         grid = generate_grid2D_tensor(im_shape).unsqueeze(0).to(device)  # [-1,1]
         # plt.imshow(grid.cpu().detach().numpy()[0, 1, :, :])
         # plt.show()
-        print("grid=generate_grid:", grid)
+        # print("grid=generate_grid:", grid)
     ode_train = NeuralODE(Network, config.optimizer, config.STEP_SIZE).to(device)
     # training loop
     ST = SpatialTransformer(im_shape).to(device)  # spatial transformer to warp image
@@ -73,9 +77,9 @@ def registration(config, device, moving, fixed):
     optimizer = torch.optim.Adam(ode_train.parameters(), lr=config.lr, amsgrad=True)
     BEST_loss_sim_loss_J = 1000
     for i in range(config.epoches):
-        if i%100 == 0:
-            plt.imshow(grid.cpu().detach().numpy()[0, 0, :, :])
-            plt.show()
+        # if i%100 == 0:
+            # plt.imshow(grid.cpu().detach().numpy()[0, 0, :, :])
+            # plt.show()
         all_phi = ode_train(grid, Tensor(np.arange(config.time_steps)), return_whole_sequence=True)
         # print("all_phi first:",all_phi.shape) #all_phi: torch.Size([2, 1, 3, 160, 192, 144])
         all_v = all_phi[1:] - all_phi[:-1]
@@ -130,6 +134,7 @@ def registration(config, device, moving, fixed):
 
 
 def evaluation(config, device, df, df_with_grid):
+    
     ### Calculate Neg Jac Ratio
     if not config.twod:
         neg_Jet = -1.0 * JacboianDet(df_with_grid)
@@ -147,12 +152,25 @@ def evaluation(config, device, df, df_with_grid):
     fixed_seg = load_nii_2(config.fixed_seg, config.twod)
     moving_seg = load_nii_2(config.moving_seg, config.twod)
     ST_seg = SpatialTransformer(fixed_seg.shape, mode='nearest').to(device)
+    print("movingseg.",moving_seg.shape)
     moving_seg = torch.from_numpy(moving_seg).to(device).float()
     # make batch dimension
     moving_seg = moving_seg[None, None, ...]
     warped_seg = ST_seg(moving_seg, df, return_phi=False)
     dice_move2fix = dice(warped_seg.unsqueeze(0).unsqueeze(0).detach().cpu().numpy(), fixed_seg, label)
     print('Avg. dice on %d structures: ' % len(label), np.mean(dice_move2fix[0]))
+
+    file = '/home/liluan/桌面/DL_Group9/data-sample/grid.jpg'
+    img = image.imread(file)
+    img = np.array(img.data.tolist())[:,:,0]
+    img.reshape(160,192)
+    print("img.shape=", np.shape(img))
+    test_moving_seg = torch.from_numpy(img).to(device).float()
+    test_moving_seg = test_moving_seg[None, None, ...]
+    test_warped_seg = ST_seg(test_moving_seg, df, return_phi=False)
+    save_result(config, df, test_warped_seg)
+
+    
 
 
 def save_result(config, df, warped_moving):
