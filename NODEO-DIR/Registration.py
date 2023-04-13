@@ -160,10 +160,9 @@ def evaluation(config, device, df, df_with_grid):
     dice_move2fix = dice(warped_seg.unsqueeze(0).unsqueeze(0).detach().cpu().numpy(), fixed_seg, label)
     print('Avg. dice on %d structures: ' % len(label), np.mean(dice_move2fix[0]))
 
-    file = '/home/liluan/桌面/DL_Group9/data-sample/grid.jpg'
+    file = '/home/liluan/桌面/DL_Group9/data-sample/grid.png'
     img = image.imread(file)
-    img = np.array(img.data.tolist())[:,:,0]
-    img.reshape(160,192)
+    img = np.array(img.data.tolist())[0:160,0:192,2]
     print("img.shape=", np.shape(img))
     test_moving_seg = torch.from_numpy(img).to(device).float()
     test_moving_seg = test_moving_seg[None, None, ...]
