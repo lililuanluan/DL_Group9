@@ -153,43 +153,86 @@ class NCC_2D(torch.nn.Module):
         # return negative cc.
         return 1. - torch.mean(cc2).float()
 
-def JacboianDet(J):
-    if J.size(-1) != 3:
-        J = J.permute(0, 2, 3, 4, 1)
+# def JacboianDet(J):
+#     if J.size(-1) != 3:
+#         J = J.permute(0, 2, 3, 4, 1)
+#     J = J + 1
+#     J = J / 2.
+#     scale_factor = torch.tensor([J.size(1), J.size(2), J.size(3)]).to(J).view(1, 1, 1, 1, 3) * 1.
+#     J = J * scale_factor
+
+#     dy = J[:, 1:, :-1, :-1, :] - J[:, :-1, :-1, :-1, :]
+#     dx = J[:, :-1, 1:, :-1, :] - J[:, :-1, :-1, :-1, :]
+#     dz = J[:, :-1, :-1, 1:, :] - J[:, :-1, :-1, :-1, :]
+
+#     Jdet0 = dx[:, :, :, :, 0] * (dy[:, :, :, :, 1] * dz[:, :, :, :, 2] - dy[:, :, :, :, 2] * dz[:, :, :, :, 1])
+#     Jdet1 = dx[:, :, :, :, 1] * (dy[:, :, :, :, 0] * dz[:, :, :, :, 2] - dy[:, :, :, :, 2] * dz[:, :, :, :, 0])
+#     Jdet2 = dx[:, :, :, :, 2] * (dy[:, :, :, :, 0] * dz[:, :, :, :, 1] - dy[:, :, :, :, 1] * dz[:, :, :, :, 0])
+
+#     Jdet = Jdet0 - Jdet1 + Jdet2
+#     # print("Jdet=", Jdet)
+#     return Jdet
+
+# def neg_Jdet_loss(J):
+#     Jdet = JacboianDet(J)
+#     neg_Jdet = -1.0 * (Jdet - 0.5)
+#     selected_neg_Jdet = F.relu(neg_Jdet)
+#     return torch.mean(selected_neg_Jdet ** 2)
+#     # return torch.log10(torch.mean(selected_neg_Jdet ** 2))
+
+# def smoothloss_loss(df):
+#     return (((df[:, :, 1:, :, :] - df[:, :, :-1, :, :]) ** 2).mean() + \
+#      ((df[:, :, :, 1:, :] - df[:, :, :, :-1, :]) ** 2).mean() + \
+#      ((df[:, :, :, :, 1:] - df[:, :, :, :, :-1]) ** 2).mean())
+
+# def magnitude_loss(all_v):
+#     all_v_x_2 = all_v[:, :, 0, :, :, :] * all_v[:, :, 0, :, :, :]
+#     all_v_y_2 = all_v[:, :, 1, :, :, :] * all_v[:, :, 1, :, :, :]
+#     all_v_z_2 = all_v[:, :, 2, :, :, :] * all_v[:, :, 2, :, :, :]
+#     all_v_magnitude = torch.mean(all_v_x_2 + all_v_y_2 + all_v_z_2)
+#     return all_v_magnitude
+
+# -----------------2D----------------
+def JacboianDet_2D(J):
+    if J.size(-1) != 2: #last dimension of J 
+        #original batch x 2 y ?? pytorch input image dimension order????
+        print("J.O=", J)
+        J = J.permute(0, 2, 3, 1) #transpose dimension batch y x 2
+        #need batch y x 2
+        print("J.PER=", J)
     J = J + 1
     J = J / 2.
-    scale_factor = torch.tensor([J.size(1), J.size(2), J.size(3)]).to(J).view(1, 1, 1, 1, 3) * 1.
+    scale_factor = torch.tensor([J.size(1), J.size(2)]).to(J).view(1, 1, 1, 2) * 1.
     J = J * scale_factor
 
-    dy = J[:, 1:, :-1, :-1, :] - J[:, :-1, :-1, :-1, :]
-    dx = J[:, :-1, 1:, :-1, :] - J[:, :-1, :-1, :-1, :]
-    dz = J[:, :-1, :-1, 1:, :] - J[:, :-1, :-1, :-1, :]
+    dy = J[:, 1:, :-1, :] - J[:, :-1, :-1, :]
+    dx = J[:, :-1, 1:, :] - J[:, :-1, :-1, :]
 
-    Jdet0 = dx[:, :, :, :, 0] * (dy[:, :, :, :, 1] * dz[:, :, :, :, 2] - dy[:, :, :, :, 2] * dz[:, :, :, :, 1])
-    Jdet1 = dx[:, :, :, :, 1] * (dy[:, :, :, :, 0] * dz[:, :, :, :, 2] - dy[:, :, :, :, 2] * dz[:, :, :, :, 0])
-    Jdet2 = dx[:, :, :, :, 2] * (dy[:, :, :, :, 0] * dz[:, :, :, :, 1] - dy[:, :, :, :, 1] * dz[:, :, :, :, 0])
+    Jdet0 = dx[:, :, :, 0] * dy[:, :, :, 1] 
+    Jdet1 = dx[:, :, :, 1] * dy[:, :, :, 0] 
 
-    Jdet = Jdet0 - Jdet1 + Jdet2
-    # print("Jdet=", Jdet)
+    Jdet = Jdet0 - Jdet1 
+    print("Jdet=", Jdet)
     return Jdet
 
-def neg_Jdet_loss(J):
-    Jdet = JacboianDet(J)
+def neg_Jdet_loss_2D(J): #no need 3D to 2D
+    Jdet = JacboianDet_2D(J)
     neg_Jdet = -1.0 * (Jdet - 0.5)
-    selected_neg_Jdet = F.relu(neg_Jdet)
-    return torch.mean(selected_neg_Jdet ** 2)
+    selected_neg_Jdet = F.relu(neg_Jdet) #select negative values of the Jacobian determinant
+    return torch.mean(selected_neg_Jdet ** 2) # average of the squared negative Jacobian determinant values
     # return torch.log10(torch.mean(selected_neg_Jdet ** 2))
 
-def smoothloss_loss(df):
-    return (((df[:, :, 1:, :, :] - df[:, :, :-1, :, :]) ** 2).mean() + \
-     ((df[:, :, :, 1:, :] - df[:, :, :, :-1, :]) ** 2).mean() + \
-     ((df[:, :, :, :, 1:] - df[:, :, :, :, :-1]) ** 2).mean())
+def smoothloss_loss_2D(df): # df batch 2 x y
+    return (((df[:, :, 1:, :] - df[:, :, :-1, :]) ** 2).mean() + \
+     ((df[:, :, :, 1:] - df[:, :, :, :-1]) ** 2).mean())
 
-def magnitude_loss(all_v):
-    all_v_x_2 = all_v[:, :, 0, :, :, :] * all_v[:, :, 0, :, :, :]
-    all_v_y_2 = all_v[:, :, 1, :, :, :] * all_v[:, :, 1, :, :, :]
-    all_v_z_2 = all_v[:, :, 2, :, :, :] * all_v[:, :, 2, :, :, :]
-    all_v_magnitude = torch.mean(all_v_x_2 + all_v_y_2 + all_v_z_2)
+def magnitude_loss_2D(all_v):# [1, 1, 3, 160, 192]
+    print("all_v=", all_v)
+    all_v_x_2 = all_v[:, :, 0, :, :] * all_v[:, :, 0, :, :]
+    all_v_y_2 = all_v[:, :, 1, :, :] * all_v[:, :, 1, :, :]
+    print("all_v_x_2=", all_v_x_2)
+  
+    all_v_magnitude = torch.mean(all_v_x_2 + all_v_y_2 )
     return all_v_magnitude
 
 def test_ncc_3D():
