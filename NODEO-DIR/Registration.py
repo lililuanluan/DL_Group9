@@ -5,7 +5,7 @@ from Network import BrainNet, BrainNet_2D
 from Loss import *
 from NeuralODE import *
 from Utils import *
-
+import matplotlib.pyplot as plt
 
 def main(config):
     device = torch.device(config.device)
@@ -63,6 +63,9 @@ def registration(config, device, moving, fixed):
                               ).to(device)
         loss_NCC = NCC_2D(win=config.NCC_win)
         grid = generate_grid2D_tensor(im_shape).unsqueeze(0).to(device)  # [-1,1]
+        # plt.imshow(grid.cpu().detach().numpy()[0, 1, :, :])
+        # plt.show()
+        print("grid=generate_grid:", grid)
     ode_train = NeuralODE(Network, config.optimizer, config.STEP_SIZE).to(device)
     # training loop
     ST = SpatialTransformer(im_shape).to(device)  # spatial transformer to warp image
@@ -70,6 +73,9 @@ def registration(config, device, moving, fixed):
     optimizer = torch.optim.Adam(ode_train.parameters(), lr=config.lr, amsgrad=True)
     BEST_loss_sim_loss_J = 1000
     for i in range(config.epoches):
+        if i%100 == 0:
+            plt.imshow(grid.cpu().detach().numpy()[0, 0, :, :])
+            plt.show()
         all_phi = ode_train(grid, Tensor(np.arange(config.time_steps)), return_whole_sequence=True)
         # print("all_phi first:",all_phi.shape) #all_phi: torch.Size([2, 1, 3, 160, 192, 144])
         all_v = all_phi[1:] - all_phi[:-1]
@@ -81,10 +87,13 @@ def registration(config, device, moving, fixed):
         # print("phi:",phi.shape) #phi: torch.Size([1, 3, 160, 192, 144])
 
         grid_voxel = (grid + 1.) / 2. * 200  # [-1, 1] -> voxel spacing,change to a fixed scale
+        
         # print("grid_voxel:",grid_voxel.shape) # [1, 3, 160, 192, 144]
         df = phi - grid_voxel  # with grid -> without grid
 
         warped_moving, df_with_grid = ST(moving, df, return_phi=True)
+        # plt.imshow(df_with_grid.cpu().detach().numpy()[0,:,:,0])
+        # plt.show()
         # similarity loss
         loss_sim = loss_NCC(warped_moving, fixed)
         warped_moving = warped_moving.squeeze(0).squeeze(0)
@@ -116,6 +125,7 @@ def registration(config, device, moving, fixed):
                 best_df = df.detach().clone()
                 best_df_with_grid = df_with_grid.detach().clone()
                 best_warped_moving = warped_moving.detach().clone()
+    
     return best_df, best_df_with_grid, best_warped_moving
 
 
