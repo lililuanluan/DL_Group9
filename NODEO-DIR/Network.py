@@ -227,13 +227,13 @@ class BrainNet_2D(ODEF):
         imgx = self.img_sz[0] # 160
         imgy = self.img_sz[1] # 192
         # print("imgx=",imgx, "imgy=", imgy, "imgz=", imgz)
-        print("x.shape", x.shape) # 1, 3, 160, 192
+        #print("x.shape", x.shape) # 1, 3, 160, 192
         # x = self.relu(self.enc_conv1(x))
         x = F.interpolate(x, scale_factor=0.5, mode='nearest')  # Optional to downsample the image
-        print("x.shape after downsample", x.shape) # 1, 3, 80, 96 # sample 1 over 2
+        #print("x.shape after downsample", x.shape) # 1, 3, 80, 96 # sample 1 over 2
         x = self.relu(self.enc_conv2(x)) # 1, 32, 40, 48
 
-        print("x.shape relu(self.enc_conv2(x)", x.shape)
+        #print("x.shape relu(self.enc_conv2(x)", x.shape)
         x = self.relu(self.enc_conv3(x)) # 1, 32, 20, 24
         # print("x.shape relu(self.enc_conv3(x)", x.shape)
         x = self.relu(self.enc_conv4(x)) # 1, 32, 10, 12
@@ -241,19 +241,19 @@ class BrainNet_2D(ODEF):
         x = self.relu(self.enc_conv5(x)) # 1, 32, 5, 6
         # print("x.shape relu(self.enc_conv5(x)", x.shape)
         x = self.enc_conv6(x) # 1, 32, 3, 3
-        print("x.shape enc_conv6(x)", x.shape)
+        #print("x.shape enc_conv6(x)", x.shape)
         x = x.view(-1) # 864 view is like reshape
-        print("x.shape view(-1)", x.shape)
+        #print("x.shape view(-1)", x.shape)
         x = self.relu(self.lin1(x))
         x = self.lin2(x)
-        print("x.shape lin1, lin2", x.shape)
+        #print("x.shape lin1, lin2", x.shape)
         x = x.view(1, 2, int(math.ceil(imgx / pow(2, self.ds))), int(math.ceil(imgy / pow(2, self.ds)))) # 1, 3, 40, 48
-        print("x.shape x.view(1, 2...)", x.shape)
+        #print("x.shape x.view(1, 2...)", x.shape)
         for _ in range(self.ds):
             x = F.upsample(x, scale_factor=2, mode='nearest') # 1, 3, 160, 192
-        print("x.shape F.upsample(x...)", x.shape)
+        #print("x.shape F.upsample(x...)", x.shape)
         # Apply Gaussian/Averaging smoothing
         for _ in range(self.smoothing_pass):
             x = self.sk(x)
-        print("x.shape after smoothing", x.shape)
+        #print("x.shape after smoothing", x.shape)
         return x

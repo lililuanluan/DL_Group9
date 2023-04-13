@@ -64,14 +64,30 @@ def load_nii(path):
 
 
 def load_nii_2(path, _2d_option):
+    if not _2d_option:
+        X = nib.load(path)
+        X = X.get_fdata()
+        X = X[:, :, 40:184]
+        # X =X[:,:,30]
+        print(X.shape)
+        return X
+    else:
+        print("load_nii path=", path)
+        X = nib.load(path)
+        X = X.get_fdata()
+        X = X[:, :, 0]
+        print("X.shape=", np.shape(X))
+        return X
+    
+
+def load_nii_2D(path, _2d_option):
     X = nib.load(path)
     X = X.get_fdata()
-    X = X[:, :, 40:184]
+    # X = X[:, :, 40:184]
     if _2d_option:
-        X =X[:,:,40]
+        # X =X[:,:,30]
         print(X.shape)
     return X
-
 
 def save_nii(img, savename):
     affine = np.diag([1, 1, 1, 1])

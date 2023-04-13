@@ -39,9 +39,9 @@ def registration(config, device, moving, fixed):
     moving = torch.from_numpy(moving).to(device).float()  # 160, 192, 144
     fixed = torch.from_numpy(fixed).to(device).float()
     # make batch dimension
-    print("moving.shape", moving.shape)
+    #print("moving.shape", moving.shape)
     moving = moving.unsqueeze(0).unsqueeze(0)  # 1, 1, 160, 192, 144
-    print("after unsqueeze moving.shape", moving.shape)
+    #print("after unsqueeze moving.shape", moving.shape)
     fixed = fixed.unsqueeze(0).unsqueeze(0)
     if not config.twod:
         Network = BrainNet(img_sz=im_shape,
@@ -89,12 +89,20 @@ def registration(config, device, moving, fixed):
         loss_sim = loss_NCC(warped_moving, fixed)
         warped_moving = warped_moving.squeeze(0).squeeze(0)
         # V magnitude loss
-        loss_v = config.lambda_v * magnitude_loss(all_v)
-        # neg Jacobian loss
-        loss_J = config.lambda_J * neg_Jdet_loss(df_with_grid)
+        if not config.twod:
+            loss_v = config.lambda_v * magnitude_loss(all_v)
+            # neg Jacobian loss
+            loss_J = config.lambda_J * neg_Jdet_loss(df_with_grid)
 
-        # phi dphi/dx loss
-        loss_df = config.lambda_df * smoothloss_loss(df)
+            # phi dphi/dx loss
+            loss_df = config.lambda_df * smoothloss_loss(df)
+        else:
+            loss_v = config.lambda_v * magnitude_loss_2D(all_v)
+            # neg Jacobian loss
+            loss_J = config.lambda_J * neg_Jdet_loss_2D(df_with_grid)
+
+            # phi dphi/dx loss
+            loss_df = config.lambda_df * smoothloss_loss_2D(df)
         loss = loss_sim + loss_v + loss_J + loss_df
         optimizer.zero_grad()
         loss.backward()
@@ -113,7 +121,10 @@ def registration(config, device, moving, fixed):
 
 def evaluation(config, device, df, df_with_grid):
     ### Calculate Neg Jac Ratio
-    neg_Jet = -1.0 * JacboianDet(df_with_grid)
+    if not config.twod:
+        neg_Jet = -1.0 * JacboianDet(df_with_grid)
+    else:
+        neg_Jet = -1.0 * JacboianDet_2D(df_with_grid)
     neg_Jet = F.relu(neg_Jet)
     mean_neg_J = torch.sum(neg_Jet).detach().cpu().numpy()
     num_neg = len(torch.where(neg_Jet > 0)[0])
@@ -135,8 +146,13 @@ def evaluation(config, device, df, df_with_grid):
 
 
 def save_result(config, df, warped_moving):
-    save_nii(df.permute(2, 3, 4, 0, 1).detach().cpu().numpy(), '%s/df.nii.gz' % (config.savepath))
-    save_nii(warped_moving.detach().cpu().numpy(), '%s/warped.nii.gz' % (config.savepath))
+    if not config.twod:
+        save_nii(df.permute(2, 3, 4, 0, 1).detach().cpu().numpy(), '%s/df.nii.gz' % (config.savepath))
+        save_nii(warped_moving.detach().cpu().numpy(), '%s/warped.nii.gz' % (config.savepath))
+    else:
+        save_nii(df.permute(2, 3, 0, 1).detach().cpu().numpy(), '%s/df.nii.gz' % (config.savepath))
+        save_nii(warped_moving.detach().cpu().numpy(), '%s/warped.nii.gz' % (config.savepath))
+
 
 
 if __name__ == '__main__':
@@ -184,10 +200,10 @@ if __name__ == '__main__':
                         dest="optimizer", default='Euler',
                         help="Euler or RK.")
     parser.add_argument("--STEP_SIZE", type=float,
-                        dest="STEP_SIZE", default=0.001,
+                        dest="STEP_SIZE", default=0.0001,
                         help="step size for numerical integration.")
     parser.add_argument("--epoches", type=int,
-                        dest="epoches", default=300,
+                        dest="epoches", default=600,
                         help="No. of epochs to train.")
     parser.add_argument("--NCC_win", type=int,
                         dest="NCC_win", default=21,
