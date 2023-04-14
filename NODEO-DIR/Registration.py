@@ -1,9 +1,8 @@
 import argparse
 import os
 import time
-
 from matplotlib.collections import LineCollection
-
+import glob
 from Network import BrainNet, BrainNet_2D
 from Loss import *
 from NeuralODE import *
@@ -11,6 +10,7 @@ from Utils import *
 import matplotlib.pyplot as plt
 from matplotlib import image
 from PIL import Image
+import cv2 # pip install opencv-python
 
 def plot_grid(x,y,ax=None,**kwargs):
     ax = ax or plt.gca()
@@ -20,17 +20,11 @@ def plot_grid(x,y,ax=None,**kwargs):
     ax.add_collection(LineCollection(segs2,**kwargs))
     ax.autoscale()
 
-def plot_grid(x,y,ax=None,**kwargs):
-    ax = ax or plt.gca()
-    segs1 = np.stack((x,y),axis=2)
-    segs2 = segs1.transpose(1, 0, 2)
-    ax.add_collection(LineCollection(segs1,**kwargs))
-    ax.add_collection(LineCollection(segs2,**kwargs))
-    ax.autoscale()
+
 
 def main(config):
     device = torch.device(config.device)
-    plot_grid()
+    # plot_grid()
     # fixed = load_nii(config.fixed)
     # moving = load_nii(config.moving)
     fixed = load_nii_2(config.fixed, config.twod)
@@ -38,6 +32,7 @@ def main(config):
     assert fixed.shape == moving.shape  # two images to be registered must in the same size
     t = time.time()
     df, df_with_grid, warped_moving = registration(config, device, moving, fixed)
+    # print("df_with_grid.size", df_with_grid.size())
     runtime = time.time() - t
     print('Registration Running Time:', runtime)
     print('---Registration DONE---')
@@ -178,15 +173,62 @@ def evaluation(config, device, df, df_with_grid):
     dice_move2fix = dice(warped_seg.unsqueeze(0).unsqueeze(0).detach().cpu().numpy(), fixed_seg, label)
     print('Avg. dice on %d structures: ' % len(label), np.mean(dice_move2fix[0]))
 
-    file = '/home/liluan/桌面/DL_Group9/data-sample/grid_m.jpg'
-    img = image.imread(file)
-    img = np.array(img.data.tolist())[30:190,20:212, 0]
+    # grid = df_with_grid.detach().cpu().numpy()[0,:,:,1]
+    # print("grid.shape", np.shape(grid))
+    # cv2.imshow("grid ", grid)
+    # cv2.waitKey()
+
+    file = '/home/liluan/桌面/DL_Group9/data-sample/grid.png'
+    img = cv2.imread(file, cv2.IMREAD_GRAYSCALE)
+    print("img size", img.shape)
+    cv2.imshow("grid file", img)
+    # cv2.waitKey()
+    img = cv2.resize(img, dsize=(160,192))
     print("img.shape=", np.shape(img))
-    test_moving_seg = torch.from_numpy(img).to(device).float()[:,:,0]
+    test_moving_seg = torch.from_numpy(img).to(device).float()[:,:]
     test_moving_seg = test_moving_seg[None, None, ...]
     test_warped_seg = ST_seg(test_moving_seg, df, return_phi=False)
-    save_result_png(config, df, test_warped_seg)
+    # print("type warped", type(test_warped_seg)) # tensor
+    # grid = test_warped_seg.detach().cpu().numpy()[0,0,:,:]
+    # # grid *= 255.0/grid.max()
+    # print(grid)
+    # print("grid=", np.shape(grid))
+    # cv2.imshow("warped grid", grid)
+    # cv2.waitKey()
+    save_grid(config, df, test_warped_seg)
+    plot_results()
 
+
+def plot_results():
+    # plot grid
+    grid_path = "./result/grid.jpg"
+    # X = nib.load(grid_path)    
+    # X = X.get_fdata()
+    # print("X.shape=",np.shape(X))
+    # X=X[0,0,:,:]
+    # plt.imshow(X)
+    # plt.show()
+    img = cv2.imread(grid_path)
+    img = cv2.resize(img, dsize=(600,600))
+    plt.imshow(img)
+    plt.show()
+    
+
+    # plot df
+    df_path = "./result/df.nii.gz"
+    X = nib.load(df_path)    
+    X = X.get_fdata()
+    for i in range(0,1):
+        X1 = X[:,:,0,i]
+        plt.imshow(X1)
+        plt.show()
+
+    # plot warped
+    warped_path = "./result/warped.nii.gz"
+    X = nib.load(warped_path)    
+    X = X.get_fdata()
+    plt.imshow(X)
+    plt.show()
     
 
 def save_result(config, df, warped_moving):
@@ -198,22 +240,19 @@ def save_result(config, df, warped_moving):
         save_nii(warped_moving.detach().cpu().numpy(), '%s/warped.nii.gz' % (config.savepath))
 
 
-def save_result_jepg(config, df, warped_moving):
+def save_grid(config, df, warped_moving):
     if not config.twod:
-        save_nii(df.permute(2, 3, 4, 0, 1).detach().cpu().numpy(), '%s/df.nii.gz' % (config.savepath))
-        save_nii(warped_moving.detach().cpu().numpy(), '%s/grid.nii.gz' % (config.savepath))
-    else:
-        save_nii(df.permute(2, 3, 0, 1).detach().cpu().numpy(), '%s/df.nii.gz' % (config.savepath))
-        save_nii(warped_moving.detach().cpu().numpy(), '%s/grid.nii.gz' % (config.savepath))
+        pass
+    else:        
+        # save_nii(warped_moving.detach().cpu().numpy(), '%s/grid.nii.gz' % (config.savepath))
+        print("saveing grid...")
+        s = warped_moving.detach().cpu().numpy()[0,0,:,:]
+        print("s.shape", np.shape(s))
+        cv2.imwrite('./result/grid.jpg', s)
+        # print("grid saved")
 
 
-def save_result_jepg(config, df, warped_moving):
-    if not config.twod:
-        save_nii(df.permute(2, 3, 4, 0, 1).detach().cpu().numpy(), '%s/df.nii.gz' % (config.savepath))
-        save_nii(warped_moving.detach().cpu().numpy(), '%s/grid.nii.gz' % (config.savepath))
-    else:
-        save_nii(df.permute(2, 3, 0, 1).detach().cpu().numpy(), '%s/df.nii.gz' % (config.savepath))
-        save_nii(warped_moving.detach().cpu().numpy(), '%s/grid.nii.gz' % (config.savepath))
+
 
 
 if __name__ == '__main__':
