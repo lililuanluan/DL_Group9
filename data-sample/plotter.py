@@ -16,7 +16,7 @@ for path in files:
     X = X.get_fdata()
     # X = skTrans.resize(X, (160, 192, 144), order=1, preserve_range=True)
     # print(X)
-    # X = X[:,:,0,0]
+    X = X[0,0,:,:]
     print("X.shape=",np.shape(X))
     X=X[0,0,:,:]
     plt.imshow(X)

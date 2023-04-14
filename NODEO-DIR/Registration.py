@@ -1,6 +1,9 @@
 import argparse
 import os
 import time
+
+from matplotlib.collections import LineCollection
+
 from Network import BrainNet, BrainNet_2D
 from Loss import *
 from NeuralODE import *
@@ -9,8 +12,25 @@ import matplotlib.pyplot as plt
 from matplotlib import image
 from PIL import Image
 
+def plot_grid(x,y,ax=None,**kwargs):
+    ax = ax or plt.gca()
+    segs1 = np.stack((x,y),axis=2)
+    segs2 = segs1.transpose(1, 0, 2)
+    ax.add_collection(LineCollection(segs1,**kwargs))
+    ax.add_collection(LineCollection(segs2,**kwargs))
+    ax.autoscale()
+
+def plot_grid(x,y,ax=None,**kwargs):
+    ax = ax or plt.gca()
+    segs1 = np.stack((x,y),axis=2)
+    segs2 = segs1.transpose(1, 0, 2)
+    ax.add_collection(LineCollection(segs1,**kwargs))
+    ax.add_collection(LineCollection(segs2,**kwargs))
+    ax.autoscale()
+
 def main(config):
     device = torch.device(config.device)
+    plot_grid()
     # fixed = load_nii(config.fixed)
     # moving = load_nii(config.moving)
     fixed = load_nii_2(config.fixed, config.twod)
@@ -27,9 +47,6 @@ def main(config):
     print('---Results Saved---')
 
 
-    
-
-
 def registration(config, device, moving, fixed):
     '''
     Registration moving to fixed.
@@ -44,9 +61,9 @@ def registration(config, device, moving, fixed):
     moving = torch.from_numpy(moving).to(device).float()  # 160, 192, 144
     fixed = torch.from_numpy(fixed).to(device).float()
     # make batch dimension
-    #print("moving.shape", moving.shape)
+    # print("moving.shape", moving.shape)
     moving = moving.unsqueeze(0).unsqueeze(0)  # 1, 1, 160, 192, 144
-    #print("after unsqueeze moving.shape", moving.shape)
+    # print("after unsqueeze moving.shape", moving.shape)
     fixed = fixed.unsqueeze(0).unsqueeze(0)
     if not config.twod:
         Network = BrainNet(img_sz=im_shape,
@@ -79,8 +96,8 @@ def registration(config, device, moving, fixed):
     BEST_loss_sim_loss_J = 1000
     for i in range(config.epoches):
         # if i%100 == 0:
-            # plt.imshow(grid.cpu().detach().numpy()[0, 0, :, :])
-            # plt.show()
+        # plt.imshow(grid.cpu().detach().numpy()[0, 0, :, :])
+        # plt.show()
         all_phi = ode_train(grid, Tensor(np.arange(config.time_steps)), return_whole_sequence=True)
         # print("all_phi first:",all_phi.shape) #all_phi: torch.Size([2, 1, 3, 160, 192, 144])
         all_v = all_phi[1:] - all_phi[:-1]
@@ -92,7 +109,7 @@ def registration(config, device, moving, fixed):
         # print("phi:",phi.shape) #phi: torch.Size([1, 3, 160, 192, 144])
 
         grid_voxel = (grid + 1.) / 2. * 200  # [-1, 1] -> voxel spacing,change to a fixed scale
-        
+
         # print("grid_voxel:",grid_voxel.shape) # [1, 3, 160, 192, 144]
         df = phi - grid_voxel  # with grid -> without grid
 
@@ -131,12 +148,11 @@ def registration(config, device, moving, fixed):
                 best_df = df.detach().clone()
                 best_df_with_grid = df_with_grid.detach().clone()
                 best_warped_moving = warped_moving.detach().clone()
-    
+
     return best_df, best_df_with_grid, best_warped_moving
 
 
 def evaluation(config, device, df, df_with_grid):
-    
     ### Calculate Neg Jac Ratio
     if not config.twod:
         neg_Jet = -1.0 * JacboianDet(df_with_grid)
@@ -154,7 +170,7 @@ def evaluation(config, device, df, df_with_grid):
     fixed_seg = load_nii_2(config.fixed_seg, config.twod)
     moving_seg = load_nii_2(config.moving_seg, config.twod)
     ST_seg = SpatialTransformer(fixed_seg.shape, mode='nearest').to(device)
-    print("movingseg.",moving_seg.shape)
+    print("movingseg.", moving_seg.shape)
     moving_seg = torch.from_numpy(moving_seg).to(device).float()
     # make batch dimension
     moving_seg = moving_seg[None, None, ...]
@@ -166,13 +182,12 @@ def evaluation(config, device, df, df_with_grid):
     img = image.imread(file)
     img = np.array(img.data.tolist())[30:190,20:212, 0]
     print("img.shape=", np.shape(img))
-    test_moving_seg = torch.from_numpy(img).to(device).float()
+    test_moving_seg = torch.from_numpy(img).to(device).float()[:,:,0]
     test_moving_seg = test_moving_seg[None, None, ...]
     test_warped_seg = ST_seg(test_moving_seg, df, return_phi=False)
     save_result_png(config, df, test_warped_seg)
 
     
-
 
 def save_result(config, df, warped_moving):
     if not config.twod:
@@ -182,19 +197,23 @@ def save_result(config, df, warped_moving):
         save_nii(df.permute(2, 3, 0, 1).detach().cpu().numpy(), '%s/df.nii.gz' % (config.savepath))
         save_nii(warped_moving.detach().cpu().numpy(), '%s/warped.nii.gz' % (config.savepath))
 
-def save_result_png(config, df, warped_moving):
+
+def save_result_jepg(config, df, warped_moving):
     if not config.twod:
-        save_nii(df.permute(2, 3, 4, 0, 1).detach().cpu().numpy(), '%s/grid_df.nii.gz' % (config.savepath))
+        save_nii(df.permute(2, 3, 4, 0, 1).detach().cpu().numpy(), '%s/df.nii.gz' % (config.savepath))
         save_nii(warped_moving.detach().cpu().numpy(), '%s/grid.nii.gz' % (config.savepath))
     else:
-        save_nii(df.permute(2, 3, 0, 1).detach().cpu().numpy(), '%s/grid_df.nii.gz' % (config.savepath))
+        save_nii(df.permute(2, 3, 0, 1).detach().cpu().numpy(), '%s/df.nii.gz' % (config.savepath))
         save_nii(warped_moving.detach().cpu().numpy(), '%s/grid.nii.gz' % (config.savepath))
-        # img = Image.fromarray(df.permute(2, 3, 0, 1).detach().cpu().numpy())
-        # img.save('%s/df.png' % (config.savepath))
 
-        # img2 = Image.fromarray(warped_moving.detach().cpu().numpy())
-        # img2.save('%s/warped.png' % (config.savepath))
-        
+
+def save_result_jepg(config, df, warped_moving):
+    if not config.twod:
+        save_nii(df.permute(2, 3, 4, 0, 1).detach().cpu().numpy(), '%s/df.nii.gz' % (config.savepath))
+        save_nii(warped_moving.detach().cpu().numpy(), '%s/grid.nii.gz' % (config.savepath))
+    else:
+        save_nii(df.permute(2, 3, 0, 1).detach().cpu().numpy(), '%s/df.nii.gz' % (config.savepath))
+        save_nii(warped_moving.detach().cpu().numpy(), '%s/grid.nii.gz' % (config.savepath))
 
 
 if __name__ == '__main__':
@@ -245,7 +264,7 @@ if __name__ == '__main__':
                         dest="STEP_SIZE", default=0.0001,
                         help="step size for numerical integration.")
     parser.add_argument("--epoches", type=int,
-                        dest="epoches", default=600,
+                        dest="epoches", default=200,
                         help="No. of epochs to train.")
     parser.add_argument("--NCC_win", type=int,
                         dest="NCC_win", default=21,
