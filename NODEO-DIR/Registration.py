@@ -7,6 +7,7 @@ from NeuralODE import *
 from Utils import *
 import matplotlib.pyplot as plt
 from matplotlib import image
+from PIL import Image
 
 def main(config):
     device = torch.device(config.device)
@@ -22,7 +23,7 @@ def main(config):
     print('---Registration DONE---')
     evaluation(config, device, df, df_with_grid)
     print('---Evaluation DONE---')
-    # save_result(config, df, warped_moving)
+    save_result(config, df, warped_moving)
     print('---Results Saved---')
 
 
@@ -117,6 +118,7 @@ def registration(config, device, moving, fixed):
             # phi dphi/dx loss
             loss_df = config.lambda_df * smoothloss_loss_2D(df)
         loss = loss_sim + loss_v + loss_J + loss_df
+        #loss = loss_sim
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
@@ -160,14 +162,14 @@ def evaluation(config, device, df, df_with_grid):
     dice_move2fix = dice(warped_seg.unsqueeze(0).unsqueeze(0).detach().cpu().numpy(), fixed_seg, label)
     print('Avg. dice on %d structures: ' % len(label), np.mean(dice_move2fix[0]))
 
-    file = '/home/liluan/桌面/DL_Group9/data-sample/grid.png'
+    file = '/home/liluan/桌面/DL_Group9/data-sample/grid_m.jpg'
     img = image.imread(file)
-    img = np.array(img.data.tolist())[0:160,0:192,2]
+    img = np.array(img.data.tolist())[30:190,20:212, 0]
     print("img.shape=", np.shape(img))
     test_moving_seg = torch.from_numpy(img).to(device).float()
     test_moving_seg = test_moving_seg[None, None, ...]
     test_warped_seg = ST_seg(test_moving_seg, df, return_phi=False)
-    save_result(config, df, test_warped_seg)
+    save_result_png(config, df, test_warped_seg)
 
     
 
@@ -180,6 +182,19 @@ def save_result(config, df, warped_moving):
         save_nii(df.permute(2, 3, 0, 1).detach().cpu().numpy(), '%s/df.nii.gz' % (config.savepath))
         save_nii(warped_moving.detach().cpu().numpy(), '%s/warped.nii.gz' % (config.savepath))
 
+def save_result_png(config, df, warped_moving):
+    if not config.twod:
+        save_nii(df.permute(2, 3, 4, 0, 1).detach().cpu().numpy(), '%s/grid_df.nii.gz' % (config.savepath))
+        save_nii(warped_moving.detach().cpu().numpy(), '%s/grid.nii.gz' % (config.savepath))
+    else:
+        save_nii(df.permute(2, 3, 0, 1).detach().cpu().numpy(), '%s/grid_df.nii.gz' % (config.savepath))
+        save_nii(warped_moving.detach().cpu().numpy(), '%s/grid.nii.gz' % (config.savepath))
+        # img = Image.fromarray(df.permute(2, 3, 0, 1).detach().cpu().numpy())
+        # img.save('%s/df.png' % (config.savepath))
+
+        # img2 = Image.fromarray(warped_moving.detach().cpu().numpy())
+        # img2.save('%s/warped.png' % (config.savepath))
+        
 
 
 if __name__ == '__main__':

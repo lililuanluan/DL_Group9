@@ -6,7 +6,7 @@ import glob
 import skimage.transform as skTrans
 
 # path = "./images/*.gz"
-path = "../NODEO-DIR/result/warped.nii.gz"
+path = "../NODEO-DIR/result/grid.nii.gz"
 # path = "/home/liluan/桌面/DL_Group9/data-sample/images/2D/002slice/slice_norm.nii.gz"
 files = glob.glob(path)
 for path in files:
