@@ -6,8 +6,8 @@ import glob
 import skimage.transform as skTrans
 
 # path = "./images/*.gz"
-# path = "./NODEO-DIR/result/warped.nii.gz"
-path = "/home/liluan/桌面/DL_Group9/data-sample/images/2D/002slice/slice_norm.nii.gz"
+#path = "/home/lu/CLionProjects/DL_Group9/NODEO-DIR/result/warped.nii.gz"
+path = "/home/lu/CLionProjects/DL_Group9/NODEO-DIR/result/grid.nii.gz"
 files = glob.glob(path)
 for path in files:
     print("filename=",path)
@@ -16,7 +16,7 @@ for path in files:
     X = X.get_fdata()
     # X = skTrans.resize(X, (160, 192, 144), order=1, preserve_range=True)
     # print(X)
-    # X = X[:,:,0,0]
+    X = X[0,0,:,:]
     print("X.shape=",np.shape(X))
     
     plt.imshow(X)

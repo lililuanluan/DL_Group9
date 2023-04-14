@@ -42,7 +42,44 @@ class GaussianKernel(torch.nn.Module):
     def forward(self, x):
         pad = int((self.win - 1) / 2)
         # Apply Gaussian by 3D kernel
+        # print("kernel shape:",self.kernel.shape)
+        # print("x shape:",x.shape)
         x = F.conv3d(x, self.kernel, padding=pad)
+        return x
+
+class GaussianKernel_2D(torch.nn.Module):
+    def __init__(self, win=11, nsig=0.1):
+        super(GaussianKernel_2D, self).__init__()
+        self.win = win
+        self.nsig = nsig
+        kernel_x, kernel_y = self.gkern1D_xy(self.win, self.nsig)
+        kernel = kernel_x * kernel_y
+        self.register_buffer("kernel_x", kernel_x)
+        self.register_buffer("kernel_y", kernel_y)
+        self.register_buffer("kernel", kernel)
+
+    def gkern1D(self, kernlen=None, nsig=None):
+        '''
+        :param nsig: large nsig gives more freedom(pixels as agents), small nsig is more fluid.
+        :return: Returns a 1D Gaussian kernel.
+        '''
+        x = np.linspace(-nsig, nsig, kernlen + 1)
+        kern1d = np.diff(st.norm.cdf(x))
+        kern1d = kern1d / kern1d.sum()
+        return torch.tensor(kern1d, requires_grad=False).float()
+
+    def gkern1D_xy(self, kernlen=None, nsig=None):
+        """Returns 3 1D Gaussian kernel on xyz direction."""
+        kernel_1d = self.gkern1D(kernlen, nsig)
+        kernel_x = kernel_1d.view(1, 1, -1, 1)
+        kernel_y = kernel_1d.view(1, 1, 1, -1)
+        return kernel_x, kernel_y
+
+    def forward(self, x):
+        pad = int((self.win - 1) / 2)
+        # Apply Gaussian by 3D kernel
+        # print(self.kernel.shape)
+        x = F.conv2d(x, self.kernel, padding=pad)
         return x
 
 
@@ -220,7 +257,7 @@ class BrainNet_2D(ODEF):
         if self.smoothing_kernel == 'AK':
             self.sk = AveragingKernel_2D(win=smoothing_win)
         else:
-            self.sk = GaussianKernel(win=smoothing_win, nsig=0.1)
+            self.sk = GaussianKernel_2D(win=smoothing_win, nsig=0.1)
 
     def forward(self, x):
 
@@ -254,6 +291,11 @@ class BrainNet_2D(ODEF):
         #print("x.shape F.upsample(x...)", x.shape)
         # Apply Gaussian/Averaging smoothing
         for _ in range(self.smoothing_pass):
-            x = self.sk(x)
+            if self.smoothing_kernel == 'AK':
+                x = self.sk(x)
+            else:
+                x_x = self.sk(x[:, 0, :, :].unsqueeze(1))
+                x_y = self.sk(x[:, 1, :, :].unsqueeze(1))
+                x = torch.cat([x_x, x_y], 1) # 1, 2, 160, 192
         #print("x.shape after smoothing", x.shape)
         return x
