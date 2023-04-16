@@ -19,12 +19,12 @@ def plot_grid(x,y,ax=None,**kwargs):
     ax.add_collection(LineCollection(segs1,**kwargs))
     ax.add_collection(LineCollection(segs2,**kwargs))
     ax.autoscale()
+    plt.show()
 
 
 
 def main(config):
     device = torch.device(config.device)
-    # plot_grid()
     # fixed = load_nii(config.fixed)
     # moving = load_nii(config.moving)
     fixed = load_nii_2(config.fixed, config.twod)
@@ -53,6 +53,7 @@ def registration(config, device, moving, fixed):
     :return all_phi: Displacement field for all time steps.
     '''
     im_shape = fixed.shape
+    print("imshape=", im_shape)
     moving = torch.from_numpy(moving).to(device).float()  # 160, 192, 144
     fixed = torch.from_numpy(fixed).to(device).float()
     # make batch dimension
@@ -80,9 +81,6 @@ def registration(config, device, moving, fixed):
                               ).to(device)
         loss_NCC = NCC_2D(win=config.NCC_win)
         grid = generate_grid2D_tensor(im_shape).unsqueeze(0).to(device)  # [-1,1]
-        # plt.imshow(grid.cpu().detach().numpy()[0, 1, :, :])
-        # plt.show()
-        # print("grid=generate_grid:", grid)
     ode_train = NeuralODE(Network, config.optimizer, config.STEP_SIZE).to(device)
     # training loop
     ST = SpatialTransformer(im_shape).to(device)  # spatial transformer to warp image
@@ -90,9 +88,6 @@ def registration(config, device, moving, fixed):
     optimizer = torch.optim.Adam(ode_train.parameters(), lr=config.lr, amsgrad=True)
     BEST_loss_sim_loss_J = 1000
     for i in range(config.epoches):
-        # if i%100 == 0:
-        # plt.imshow(grid.cpu().detach().numpy()[0, 0, :, :])
-        # plt.show()
         all_phi = ode_train(grid, Tensor(np.arange(config.time_steps)), return_whole_sequence=True)
         # print("all_phi first:",all_phi.shape) #all_phi: torch.Size([2, 1, 3, 160, 192, 144])
         all_v = all_phi[1:] - all_phi[:-1]
@@ -101,17 +96,14 @@ def registration(config, device, moving, fixed):
         # print("all_phi:",all_phi.shape) #all_phi: torch.Size([2, 1, 3, 160, 192, 144])
 
         phi = all_phi[-1]
-        # print("phi:",phi.shape) #phi: torch.Size([1, 3, 160, 192, 144])
 
         grid_voxel = (grid + 1.) / 2. * 200  # [-1, 1] -> voxel spacing,change to a fixed scale
 
         # print("grid_voxel:",grid_voxel.shape) # [1, 3, 160, 192, 144]
         df = phi - grid_voxel  # with grid -> without grid
-
+        
         warped_moving, df_with_grid = ST(moving, df, return_phi=True)
-        # plt.imshow(df_with_grid.cpu().detach().numpy()[0,:,:,0])
-        # plt.show()
-        # similarity loss
+        
         loss_sim = loss_NCC(warped_moving, fixed)
         warped_moving = warped_moving.squeeze(0).squeeze(0)
         # V magnitude loss
@@ -153,6 +145,9 @@ def evaluation(config, device, df, df_with_grid):
         neg_Jet = -1.0 * JacboianDet(df_with_grid)
     else:
         neg_Jet = -1.0 * JacboianDet_2D(df_with_grid)
+
+        
+
     neg_Jet = F.relu(neg_Jet)
     mean_neg_J = torch.sum(neg_Jet).detach().cpu().numpy()
     num_neg = len(torch.where(neg_Jet > 0)[0])
@@ -171,64 +166,39 @@ def evaluation(config, device, df, df_with_grid):
     moving_seg = moving_seg[None, None, ...]
     warped_seg = ST_seg(moving_seg, df, return_phi=False)
     dice_move2fix = dice(warped_seg.unsqueeze(0).unsqueeze(0).detach().cpu().numpy(), fixed_seg, label)
-    print('Avg. dice on %d structures: ' % len(label), np.mean(dice_move2fix[0]))
+    print('Avg. dice on %d structures: ' % len(label), np.mean(dice_move2fix[0]))    
 
-    # grid = df_with_grid.detach().cpu().numpy()[0,:,:,1]
-    # print("grid.shape", np.shape(grid))
-    # cv2.imshow("grid ", grid)
-    # cv2.waitKey()
-
-    file = '/home/liluan/桌面/DL_Group9/data-sample/grid.png'
-    img = cv2.imread(file, cv2.IMREAD_GRAYSCALE)
-    print("img size", img.shape)
-    cv2.imshow("grid file", img)
-    # cv2.waitKey()
-    img = cv2.resize(img, dsize=(160,192))
-    print("img.shape=", np.shape(img))
-    test_moving_seg = torch.from_numpy(img).to(device).float()[:,:]
-    test_moving_seg = test_moving_seg[None, None, ...]
-    test_warped_seg = ST_seg(test_moving_seg, df, return_phi=False)
-    # print("type warped", type(test_warped_seg)) # tensor
-    # grid = test_warped_seg.detach().cpu().numpy()[0,0,:,:]
-    # # grid *= 255.0/grid.max()
-    # print(grid)
-    # print("grid=", np.shape(grid))
-    # cv2.imshow("warped grid", grid)
-    # cv2.waitKey()
-    save_grid(config, df, test_warped_seg)
-    plot_results()
-
-
-def plot_results():
-    # plot grid
-    grid_path = "./result/grid.jpg"
-    # X = nib.load(grid_path)    
-    # X = X.get_fdata()
-    # print("X.shape=",np.shape(X))
-    # X=X[0,0,:,:]
-    # plt.imshow(X)
-    # plt.show()
-    img = cv2.imread(grid_path)
-    img = cv2.resize(img, dsize=(600,600))
-    plt.imshow(img)
-    plt.show()
+ 
     
+    plot_results(config, df_with_grid)
 
-    # plot df
-    df_path = "./result/df.nii.gz"
-    X = nib.load(df_path)    
-    X = X.get_fdata()
-    for i in range(0,1):
-        X1 = X[:,:,0,i]
-        plt.imshow(X1)
+
+def plot_results(config, df_with_grid):
+    if not config.twod:
+        pass
+    else:
+        # plot grid
+        print("plot grid...")
+        plot_grid(df_with_grid.cpu().detach().numpy()[0, :, :, 1],
+        df_with_grid.cpu().detach().numpy()[0, :, :, 0])
+
+        # plot df
+        print("plot df...")
+        df_path = "./result/df.nii.gz"
+        X = nib.load(df_path)    
+        X = X.get_fdata()
+        for i in range(0,1):
+            X1 = X[:,:,0,i]
+            plt.imshow(X1)
+            plt.show()
+
+        # plot warped
+        print("plot warped...")
+        warped_path = "./result/warped.nii.gz"
+        X = nib.load(warped_path)    
+        X = X.get_fdata()
+        plt.imshow(X)
         plt.show()
-
-    # plot warped
-    warped_path = "./result/warped.nii.gz"
-    X = nib.load(warped_path)    
-    X = X.get_fdata()
-    plt.imshow(X)
-    plt.show()
     
 
 def save_result(config, df, warped_moving):
@@ -239,17 +209,6 @@ def save_result(config, df, warped_moving):
         save_nii(df.permute(2, 3, 0, 1).detach().cpu().numpy(), '%s/df.nii.gz' % (config.savepath))
         save_nii(warped_moving.detach().cpu().numpy(), '%s/warped.nii.gz' % (config.savepath))
 
-
-def save_grid(config, df, warped_moving):
-    if not config.twod:
-        pass
-    else:        
-        # save_nii(warped_moving.detach().cpu().numpy(), '%s/grid.nii.gz' % (config.savepath))
-        print("saveing grid...")
-        s = warped_moving.detach().cpu().numpy()[0,0,:,:]
-        print("s.shape", np.shape(s))
-        cv2.imwrite('./result/grid.jpg', s)
-        # print("grid saved")
 
 
 
@@ -303,7 +262,7 @@ if __name__ == '__main__':
                         dest="STEP_SIZE", default=0.0001,
                         help="step size for numerical integration.")
     parser.add_argument("--epoches", type=int,
-                        dest="epoches", default=200,
+                        dest="epoches", default=300,
                         help="No. of epochs to train.")
     parser.add_argument("--NCC_win", type=int,
                         dest="NCC_win", default=21,
