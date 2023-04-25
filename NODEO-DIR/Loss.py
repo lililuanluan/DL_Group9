@@ -195,7 +195,7 @@ def magnitude_loss(all_v):
 # -----------------2D----------------
 def JacboianDet_2D(J):
     if J.size(-1) != 2: #last dimension of J 
-        #original batch x 2 y ?? pytorch input image dimension order????
+        #original batch x 2 y 
         #print("J.O=", J)
         J = J.permute(0, 2, 3, 1) #transpose dimension batch y x 2
         #need batch y x 2
