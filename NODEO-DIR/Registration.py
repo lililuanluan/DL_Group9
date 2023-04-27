@@ -150,6 +150,7 @@ def evaluation(config, device, df, df_with_grid):
         
 
     neg_Jet = F.relu(neg_Jet)
+    
     mean_neg_J = torch.sum(neg_Jet).detach().cpu().numpy()
     num_neg = len(torch.where(neg_Jet > 0)[0])
     total = neg_Jet.size(-1) * neg_Jet.size(-2) * neg_Jet.size(-3)
@@ -171,10 +172,10 @@ def evaluation(config, device, df, df_with_grid):
 
  
     
-    plot_results(config, df_with_grid)
+    plot_results(config, df_with_grid, neg_Jet)
 
 
-def plot_results(config, df_with_grid):
+def plot_results(config, df_with_grid, neg_Jet):
     if not config.twod:
         pass
     else:
@@ -201,6 +202,13 @@ def plot_results(config, df_with_grid):
         X = X.get_fdata()
         plt.imshow(X)
         plt.show()
+
+        # plot Neg
+        print("plot Neg...")
+        X = neg_Jet.cpu().detach().numpy()[0,:, :]
+        plt.imshow(X)
+        plt.show()
+
     
 
 def save_result(config, df, warped_moving):
