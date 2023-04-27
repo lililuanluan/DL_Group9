@@ -122,7 +122,8 @@ def registration(config, device, moving, fixed):
 
             # phi dphi/dx loss
             loss_df = config.lambda_df * smoothloss_loss_2D(df)
-        loss = loss_sim + loss_v + loss_J + loss_df
+        # loss = loss_sim + loss_v + loss_J + loss_df #(a) c
+        loss = loss_sim + loss_v +  loss_df # (b) d
         #loss = loss_sim
         optimizer.zero_grad()
         loss.backward()
