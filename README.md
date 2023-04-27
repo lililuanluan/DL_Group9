@@ -1,3 +1,6 @@
+# Team members
+luanli 5463866 L.Li-30@student.tudelft.nl
+
 # Usage
 ## to run 3D registration
 ```
