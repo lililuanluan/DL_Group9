@@ -9,10 +9,11 @@ Yes, apply for OASIS-1 and OASIS-2: https://www.oasis-brains.org/#access
 # to run plot_nii.py
 cd ./NODEO-DIR/
 python3 ../plot_nii.py
-# to run registration
+# to run 3D registration
 python3 Registration.py --fixed ../data-sample/images/aligned_norm.nii.gz  --moving ../data-sample/images/aligned_norm_2.nii.gz --fixed_seg ../data-sample/images/aligned_seg35.nii.gz --moving_seg ../data-sample/images/aligned_seg35_2.nii.gz 
 
-
+# run 2D registration
+python3 Registration.py --fixed ../data-sample/images/2D/001slice/slice_norm.nii.gz  --moving ../data-sample/images/2D/002slice/slice_norm.nii.gz --fixed_seg ../data-sample/images/2D/001slice/slice_seg4.nii.gz --moving_seg ../data-sample/images/2D/002slice/slice_seg4.nii.gz --twod True
 # to configure lambda1 in table 1
 python3 Registration.py --lambda_J 2
 

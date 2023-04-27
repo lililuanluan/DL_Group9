@@ -54,24 +54,46 @@ class SpatialTransformer(nn.Module):
         else:
             return F.grid_sample(src, new_locs, align_corners=True, mode=self.mode)
 
+
 def load_nii(path):
     print("load_nii path=", path)
     X = nib.load(path)
     X = X.get_fdata()
-    print("X.shape=",np.shape(X))
+    print("X.shape=", np.shape(X))
     return X
 
 
-def load_nii_2(path):
-    X = nib.load(path)    
+def load_nii_2(path, _2d_option):
+    if not _2d_option:
+        X = nib.load(path)
+        X = X.get_fdata()
+        X = X[:, :, 40:184]
+        # X =X[:,:,30]
+        print(X.shape)
+        return X
+    else:
+        print("load_nii path=", path)
+        X = nib.load(path)
+        X = X.get_fdata()
+        X = X[:, :, 0]
+        print("X.shape=", np.shape(X))
+        return X
+    
+
+def load_nii_2D(path, _2d_option):
+    X = nib.load(path)
     X = X.get_fdata()
-    X= X[:,:,40:184]
+    # X = X[:, :, 40:184]
+    if _2d_option:
+        # X =X[:,:,30]
+        print(X.shape)
     return X
 
 def save_nii(img, savename):
     affine = np.diag([1, 1, 1, 1])
     new_img = nib.nifti1.Nifti1Image(img, affine, header=None)
     nib.save(new_img, savename)
+
 
 def generate_grid3D_tensor(shape):
     x_grid = torch.linspace(-1., 1., shape[0])
@@ -84,6 +106,17 @@ def generate_grid3D_tensor(shape):
     grid = torch.stack([z_grid, y_grid, x_grid], dim=0)
     return grid
 
+def generate_grid2D_tensor(shape):
+    x_grid = torch.linspace(-1., 1., shape[0])
+    y_grid = torch.linspace(-1., 1., shape[1])
+    #z_grid = torch.linspace(-1., 1., shape[2])
+    x_grid, y_grid = torch.meshgrid(x_grid, y_grid)
+    # Note that default the dimension in the grid is reversed:
+    # z, y, x
+    grid = torch.stack([y_grid, x_grid], dim=0)
+    print("z0",grid.shape)
+    return grid
+
 def dice(array1, array2, labels):
     """
     Computes the dice overlap between two arrays for a given set of integer labels.
@@ -91,13 +124,11 @@ def dice(array1, array2, labels):
     dicem = np.zeros(len(labels))
     for idx, label in enumerate(labels):
         top = 2 * np.sum(np.logical_and(array1 == label, array2 == label))
-        #print("top is",top);
+        # print("top is",top);
         bottom = np.sum(array1 == label) + np.sum(array2 == label)
-        #print("bottom isv1",bottom);
+        # print("bottom isv1",bottom);
         bottom = np.maximum(bottom, np.finfo(float).eps)  # add epsilon
-        #print("bottom isv2",bottom);
+        # print("bottom isv2",bottom);
         dicem[idx] = top / bottom
-        #print("dicem is",dicem);
+        # print("dicem is",dicem);
     return dicem
-
-
