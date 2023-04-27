@@ -36,10 +36,11 @@ def main(config):
     runtime = time.time() - t
     print('Registration Running Time:', runtime)
     print('---Registration DONE---')
-    evaluation(config, device, df, df_with_grid)
-    print('---Evaluation DONE---')
     save_result(config, df, warped_moving)
     print('---Results Saved---')
+    evaluation(config, device, df, df_with_grid)
+    print('---Evaluation DONE---')
+    
 
 
 def registration(config, device, moving, fixed):
@@ -188,6 +189,7 @@ def plot_results(config, df_with_grid):
         X = nib.load(df_path)    
         X = X.get_fdata()
         for i in range(0,1):
+            print(i)
             X1 = X[:,:,0,i]
             plt.imshow(X1)
             plt.show()
